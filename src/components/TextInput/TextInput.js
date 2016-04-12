@@ -1,21 +1,20 @@
-import { PropTypes } from 'react';
 import Shared from '../../Shared';
 import cx from 'classnames';
+import compose from 'recompose/compose';
+import defaultProps from 'recompose/defaultProps';
 import mapProps from 'recompose/mapProps';
-import toClass from 'recompose/toClass';
+import withHandlers from 'recompose/withHandlers';
+import { evolve } from 'ramda';
 
-const TextInput = mapProps(
-  (props) => Object.assign({}, props, {
-    className: cx('form-control', props.className),
-    onChange: (e) => props.onChange && props.onChange(e.target.value),
-  }),
-  'input'
-);
+const TextInput = compose(
+  defaultProps({ className: '' }),
+  mapProps((props) => evolve({ className: (s) => cx('form-control', s) }, props)),
+  withHandlers({
+    onChange: (props) => ({ target }) =>
+      props.onChange && props.onChange(target.value),
+  })
+)('input');
 
-TextInput.propTypes = {
-  className: PropTypes.string,
-};
-
-Shared.registerComponent('TextInput', toClass(TextInput));
+Shared.registerComponent('TextInput', TextInput);
 
 export default TextInput;

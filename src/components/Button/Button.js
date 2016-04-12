@@ -1,19 +1,12 @@
-import { PropTypes } from 'react';
 import cx from 'classnames';
+import compose from 'recompose/compose';
+import defaultProps from 'recompose/defaultProps';
 import mapProps from 'recompose/mapProps';
-import { merge } from 'ramda';
+import { evolve } from 'ramda';
 
-const Button = mapProps(
-  (props) =>
-    merge(
-      props,
-      { className: cx('btn', props.className) }
-    ),
-  'button'
-);
-
-Button.propTypes = {
-  children: PropTypes.node,
-};
+const Button = compose(
+  defaultProps({ className: 'btn' }),
+  mapProps((props) => evolve({ className: (s) => cx('btn', s) }, props))
+)('button');
 
 export default Button;

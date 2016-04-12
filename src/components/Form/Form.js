@@ -1,26 +1,35 @@
 import { PropTypes } from 'react';
+import Button from 'components/Button';
 import Shared from '../../Shared';
 import RFForm, {
-  addInputTypes, Button, Context, Field, Message, Summary, Trigger,
+  addInputTypes, Button as RFFormButton, Context, Field, Message, Summary, Trigger,
 } from 'react-formal';
-import { is, merge, partial, path } from 'ramda';
+import cx from 'classnames';
 import compose from 'recompose/compose';
+import defaultProps from 'recompose/defaultProps';
 import getContext from 'recompose/getContext';
 import lifecycle from 'recompose/lifecycle';
 import mapProps from 'recompose/mapProps';
+import toClass from 'recompose/toClass';
+import withHandlers from 'recompose/withHandlers';
+import { evolve, is, partial, path } from 'ramda';
 
 const handleSubmit = ({ coreuiModalContext, onSubmit }, formValue) => {
-  const event = new CustomEvent(
-    'coreuiSubmit',
-    { bubbles: true, cancelable: true, detail: { stopPropagation: false } },
-  );
+  if (!coreuiModalContext) {
+    onSubmit(formValue);
+  } else {
+    const event = new CustomEvent(
+      'coreuiSubmit',
+      { bubbles: true, cancelable: true, detail: { stopPropagation: false } },
+    );
 
-  const onHide = coreuiModalContext.onHide;
+    const onHide = coreuiModalContext.onHide;
 
-  onSubmit(formValue, event);
+    onSubmit(formValue, event);
 
-  if (is(Function, onHide) && !path(['detail, stopPropagation'], event)) {
-    onHide(event);
+    if (is(Function, onHide) && !path(['detail, stopPropagation'], event)) {
+      onHide(event);
+    }
   }
 };
 
@@ -48,27 +57,37 @@ const setup = () => {
 
   inputs.forEach(({ component, types }) => {
     if (component) {
-      types.forEach((t) => addInputTypes({ [t]: component }));
+      types.forEach((t) => addInputTypes({ [t]: toClass(component) }));
     }
   });
 };
 
 const Form = compose(
   getContext({ coreuiModalContext: PropTypes.object }),
-  mapProps((props) => merge(props, { onSubmit: partial(handleSubmit, [props]) })),
+  withHandlers({ onSubmit: (props) => partial(handleSubmit, [props]) }),
   lifecycle(setup, Function.prototype)
 )(RFForm);
 
+const FormButton = defaultProps({ component: Button })(RFFormButton);
+const FormField = defaultProps({ errorClass: 'has-danger' })(Field);
+const FormMessage = compose(
+  defaultProps({ className: '', errorClass: 'has-danger' }),
+  mapProps((props) => evolve({ className: (s) => cx('form-msg', s) }, props))
+)(Message);
+
 Form.addInputTypes = addInputTypes;
-Form.Button = Button;
+Form.Button = FormButton;
 Form.Context = Context;
-Form.Field = Field;
-Form.Message = Message;
+Form.Field = FormField;
+Form.Message = FormMessage;
 Form.Summary = Summary;
 Form.Trigger = Trigger;
 
 Shared.registerComponent('Form', Form);
 
-export { addInputTypes, Button, Context, Field, Message, Summary, Trigger };
+export {
+  addInputTypes, FormButton as Button, Context, FormField as Field,
+  FormMessage as Message, Summary, Trigger,
+};
 
 export default Form;

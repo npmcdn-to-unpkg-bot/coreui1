@@ -10,7 +10,7 @@ describe('TextInput', () => {
   it('should render a ReactElement', () => {
     const tree = sd.shallowRender(<TextInput className="foo" defaultValue="Title" />);
     const vdom = tree.getRenderOutput();
-    expect(vdom).to.have.property('type', 'input');
+    expect(vdom).to.have.property('type');
     expect(vdom.props).to.have.property('defaultValue', 'Title');
     expect(vdom.props).to.have.property('className').to.contain('form-control');
   });
