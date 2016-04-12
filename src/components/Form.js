@@ -3,14 +3,26 @@ import RFForm, {
   addInputTypes, Button, Context, Field, Message, Summary, Trigger,
 } from 'react-formal';
 import Shared from '../Shared';
-import { merge, partial } from 'ramda';
+import { is, merge, partial, path } from 'ramda';
 import compose from 'recompose/compose';
 import getContext from 'recompose/getContext';
 import lifecycle from 'recompose/lifecycle';
 import mapProps from 'recompose/mapProps';
 
-const handleSubmit = (props, e) =>
-  console.log(props);
+const handleSubmit = ({ coreuiModalContext, onSubmit }, formValue) => {
+  const event = new CustomEvent(
+    'coreuiSubmit',
+    { bubbles: true, cancelable: true, detail: { stopPropagation: false } },
+  );
+
+  const onHide = coreuiModalContext.onHide;
+
+  onSubmit(formValue, event);
+
+  if (is(Function, onHide) && !path(['detail, stopPropagation'], event)) {
+    onHide(event);
+  }
+};
 
 const setup = () => {
   const {
@@ -38,8 +50,8 @@ const setup = () => {
 };
 
 const Form = compose(
-  mapProps((props) => merge(props, { onSubmit: (e) => handleSubmit(props, e) })),
   getContext({ coreuiModalContext: PropTypes.object }),
+  mapProps((props) => merge(props, { onSubmit: partial(handleSubmit, [props]) })),
   lifecycle(setup, Function.prototype)
 )(RFForm);
 

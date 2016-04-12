@@ -1,10 +1,14 @@
 import React, { PropTypes } from 'react';
 import cx from 'classnames';
 import mapProps from 'recompose/mapProps';
+import { merge } from 'ramda';
 
 const Button = mapProps(
-  (props) => Object.assign({}, props,
-    { className: cx('btn', props.className) }),
+  (props) =>
+    merge(
+      props,
+      { className: cx('btn', props.className) }
+    ),
   'button'
 );
 

@@ -18,7 +18,7 @@ class ModalExample extends Component {
     this.setState({ showModal: !this.state.showModal })
 
   maybeRenderModal = () => this.state.showModal &&
-    <Modal onHide={this.toggleShowModal}><div>Content</div></Modal>
+    <Modal events={{ onHide: this.toggleShowModal }}><div>Content</div></Modal>
 
   render = () => (
     <div>
@@ -44,8 +44,8 @@ definecard(
 );
 
 const buttons = [
-  { displayName: 'Cancel', isCancel: true, name: 'cancel' },
-  { displayName: 'Submit', isDefault: true, isFormSubmit: true, name: 'submit' },
+  { displayText: 'Cancel', isCancel: true, name: 'cancel' },
+  { displayText: 'Submit', isDefault: true, isFormSubmit: true, name: 'submit' },
 ];
 
 const defaultStr = yup.string().default('');
@@ -62,25 +62,27 @@ class ModalFormExample extends Component {
   toggleShowModal = () =>
     this.setState({ showModal: !this.state.showModal })
 
-  maybeRenderModal = () => this.state.showModal &&
-  <Modal {...{ buttons }}
-    header="Modal Form Example"
-    onHide={this.toggleShowModal}
-  >
-    <Form {...{ schema }}
-      defaultValue={schema.default()}
-      onSubmit={(v) => console.log(v)}
+  maybeRenderModal = () => this.state.showModal && (
+    <Modal {...{ buttons }}
+      events={{ onHide: this.toggleShowModal }}
+      headerContent="Modal Form Example"
     >
-      <div className="form-group">
-        <Label>First Name</Label>
-        <Field
-          name="name.first"
-          placeholder="First name"
-        />
-        <Message for="name.first" />
-      </div>
-    </Form>
-  </Modal>
+      <Form {...{ schema }}
+        defaultValue={schema.default()}
+        onSubmit={(v) => console.log(v)}
+      >
+        <div className="form-group">
+          <Label>First Name</Label>
+          <Field
+            autoFocus
+            name="name.first"
+            placeholder="First name"
+          />
+          <Message for="name.first" />
+        </div>
+      </Form>
+    </Modal>
+  )
 
   render = () => (
     <div>
