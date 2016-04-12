@@ -1,6 +1,5 @@
-import React from 'react';
+import Shared from '../../Shared';
 import RWMultiselect from 'react-widgets/lib/Multiselect';
-import Shared from '../Shared';
 
 const MultiselectInput = RWMultiselect;
 

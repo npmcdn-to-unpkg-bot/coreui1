@@ -1,6 +1,5 @@
-import React from 'react';
+import Shared from '../../Shared';
 import RWCalendar from 'react-widgets/lib/Calendar';
-import Shared from '../Shared';
 
 const CalendarInput = RWCalendar;
 

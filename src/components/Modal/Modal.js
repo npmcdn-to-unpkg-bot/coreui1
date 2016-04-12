@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import Button from 'components/Button';
-import Shared from '../Shared';
+import Shared from '../../Shared';
 import ReactOverlaysModal from 'react-overlays/lib/Modal';
 import compose from 'recompose/compose';
 import cx from 'classnames';

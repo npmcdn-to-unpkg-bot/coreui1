@@ -21,7 +21,7 @@ module.exports = function (wallaby) {
 
     setup: function () {
       const chai = require('chai');
-      
+
       chai.use(require('dirty-chai'));
       chai.use(require('skin-deep/chai'));
     },

@@ -1,8 +1,8 @@
-import React, { PropTypes } from 'react';
+import { PropTypes } from 'react';
+import Shared from '../../Shared';
 import RFForm, {
   addInputTypes, Button, Context, Field, Message, Summary, Trigger,
 } from 'react-formal';
-import Shared from '../Shared';
 import { is, merge, partial, path } from 'ramda';
 import compose from 'recompose/compose';
 import getContext from 'recompose/getContext';
@@ -33,7 +33,9 @@ const setup = () => {
   const inputs = [
     { component: CalendarInput, types: ['calendar'] },
     { component: ComboboxInput, types: ['combobox'] },
-    { component: DateTimePickerInput, types: ['datetimepicker', 'timepicker'] },
+    { component: DateTimePickerInput,
+      types: ['date', 'time', 'datepicker', 'datetimepicker', 'timepicker'],
+    },
     { component: DropdownListInput, types: ['dropdownlist'] },
     { component: MultiselectInput, types: ['array', 'multiselect'] },
     { component: NumberPickerInput, types: ['number'] },
@@ -45,7 +47,9 @@ const setup = () => {
   ];
 
   inputs.forEach(({ component, types }) => {
-    if (component) { types.forEach((t) => addInputTypes({ [t]: component })); }
+    if (component) {
+      types.forEach((t) => addInputTypes({ [t]: component }));
+    }
   });
 };
 

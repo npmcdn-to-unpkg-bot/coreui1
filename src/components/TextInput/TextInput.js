@@ -1,10 +1,8 @@
-import React, { PropTypes } from 'react';
+import { PropTypes } from 'react';
+import Shared from '../../Shared';
 import cx from 'classnames';
 import mapProps from 'recompose/mapProps';
 import toClass from 'recompose/toClass';
-
-
-import Shared from '../Shared';
 
 const TextInput = mapProps(
   (props) => Object.assign({}, props, {

@@ -43,7 +43,7 @@
     "clean:lib": "rimraf ./lib/*",
     "compile:lib": "babel src --out-dir lib",
     "build:lib": "npm run clean:lib && npm run compile:lib",
-    "build": "npm run build:lib",
+    "build": "cross-env NODE_PATH=src npm run build:lib",
     "prestatic": "rm -rf cards/public/build",
     "start": "kotatsu serve --progress $npm_package_kotatsu_config",
     "static": "cross-env NODE_ENV=production kotatsu build client -o cards/public/build --minify $npm_package_kotatsu_config",

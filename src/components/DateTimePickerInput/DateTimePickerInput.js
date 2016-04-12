@@ -1,6 +1,5 @@
-import React from 'react';
+import Shared from '../../Shared';
 import RWDateTimePicker from 'react-widgets/lib/DateTimePicker';
-import Shared from '../Shared';
 
 const DateTimePickerInput = RWDateTimePicker;
 

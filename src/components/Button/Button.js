@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import { PropTypes } from 'react';
 import cx from 'classnames';
 import mapProps from 'recompose/mapProps';
 import { merge } from 'ramda';

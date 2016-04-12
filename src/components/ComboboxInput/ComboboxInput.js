@@ -1,6 +1,5 @@
-import React from 'react';
+import Shared from '../../Shared';
 import RWCombobox from 'react-widgets/lib/Combobox';
-import Shared from '../Shared';
 
 const ComboboxInput = RWCombobox;
 

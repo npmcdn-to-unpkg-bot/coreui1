@@ -1,6 +1,5 @@
-import React from 'react';
+import Shared from '../../Shared';
 import RWNumberPicker from 'react-widgets/lib/NumberPicker';
-import Shared from '../Shared';
 
 const NumberPickerInput = RWNumberPicker;
 

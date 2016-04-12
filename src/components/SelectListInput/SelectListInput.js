@@ -1,6 +1,5 @@
-import React from 'react';
+import Shared from '../../Shared';
 import RWSelectList from 'react-widgets/lib/SelectList';
-import Shared from '../Shared';
 
 const SelectListInput = RWSelectList;
 
