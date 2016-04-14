@@ -68,7 +68,12 @@ const Form = compose(
   lifecycle(setup, Function.prototype)
 )(RFForm);
 
-const FormButton = defaultProps({ component: Button })(RFFormButton);
+const FormButton = compose(
+  defaultProps({ className: '', component: Button }),
+  mapProps((props) => evolve({
+    className: (s) => cx({ 'btn-primary': props.type === 'submit' }, s),
+  }, props))
+)(RFFormButton);
 const FormField = defaultProps({ errorClass: 'has-danger' })(Field);
 const FormMessage = compose(
   defaultProps({ className: '', errorClass: 'has-danger' }),
