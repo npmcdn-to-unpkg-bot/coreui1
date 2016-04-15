@@ -9,6 +9,7 @@ import Modal from './components/Modal';
 import MultiselectInput from './components/MultiselectInput';
 import NumberPickerInput from './components/NumberPickerInput';
 import SelectListInput from './components/SelectListInput';
+import Tabs from './components/Tabs';
 import TextInput from './components/TextInput';
 
 export { Button };
@@ -22,10 +23,11 @@ export { Modal };
 export { MultiselectInput };
 export { NumberPickerInput };
 export { SelectListInput };
+export { Tabs };
 export { TextInput };
 
 export default {
   Button, CalendarInput, ComboboxInput, DateTimePickerInput,
   DropdownListInput, Form, Label, Modal, MultiselectInput,
-  NumberPickerInput, SelectListInput, TextInput,
+  NumberPickerInput, SelectListInput, Tabs, TextInput,
 };
