@@ -58,6 +58,7 @@
     "griddle-render": "0.0.31",
     "ramda": "^0.21.0",
     "react": "^0.14.8",
+    "react-aria-tabpanel": "^4.2.1",
     "react-dom": "^0.14.8",
     "react-formal": "^0.16.0",
     "react-overlays": "^0.6.3",

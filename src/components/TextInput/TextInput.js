@@ -1,6 +1,6 @@
 import Shared from '../../Shared';
-import cx from 'classnames';
 import compose from 'recompose/compose';
+import cx from 'classnames';
 import defaultProps from 'recompose/defaultProps';
 import mapProps from 'recompose/mapProps';
 import withHandlers from 'recompose/withHandlers';

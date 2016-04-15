@@ -4,8 +4,8 @@ import Shared from '../../Shared';
 import RFForm, {
   addInputTypes, Button as RFFormButton, Context, Field, Message, Summary, Trigger,
 } from 'react-formal';
-import cx from 'classnames';
 import compose from 'recompose/compose';
+import cx from 'classnames';
 import defaultProps from 'recompose/defaultProps';
 import getContext from 'recompose/getContext';
 import lifecycle from 'recompose/lifecycle';
@@ -62,23 +62,25 @@ const setup = () => {
   });
 };
 
-const Form = compose(
-  getContext({ coreuiModalContext: PropTypes.object }),
-  withHandlers({ onSubmit: (props) => partial(handleSubmit, [props]) }),
-  lifecycle(setup, Function.prototype)
-)(RFForm);
-
 const FormButton = compose(
   defaultProps({ className: '', component: Button }),
   mapProps((props) => evolve({
     className: (s) => cx({ 'btn-primary': props.type === 'submit' }, s),
   }, props))
 )(RFFormButton);
+
 const FormField = defaultProps({ errorClass: 'has-danger' })(Field);
+
 const FormMessage = compose(
   defaultProps({ className: '', errorClass: 'has-danger' }),
   mapProps((props) => evolve({ className: (s) => cx('form-msg', s) }, props))
 )(Message);
+
+const Form = compose(
+  getContext({ coreuiModalContext: PropTypes.object }),
+  withHandlers({ onSubmit: (props) => partial(handleSubmit, [props]) }),
+  lifecycle(setup, Function.prototype)
+)(RFForm);
 
 Form.addInputTypes = addInputTypes;
 Form.Button = FormButton;
