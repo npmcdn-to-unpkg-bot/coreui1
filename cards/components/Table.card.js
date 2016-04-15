@@ -24,6 +24,26 @@ definecard(
 );
 
 definecard(
+  'Table Specified Columns',
+  `
+  `,
+  <div className="container">
+    <div className="row">
+      <div className="col-xs-8 col-xl-4">
+        <Table
+          columns={['Age', 'Name']}
+          data={[
+            { Name: 'Griffin Smith', Age: 18 },
+            { Age: 23, Name: 'Lee Salminen' },
+            { Age: 28, Position: 'Developer' },
+          ]}
+        />
+      </div>
+    </div>
+  </div>
+);
+
+definecard(
   'Table Column Display Names',
   `
   `,

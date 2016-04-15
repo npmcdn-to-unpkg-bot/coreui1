@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import TextInput from 'components/TextInput';
 import cx from 'classnames';
 
-class CustomPagination extends Component {
+class TablePagination extends Component {
   componentWillMount = () => {
     const { events, settings } = this.props;
     events.setPageSize(settings.pageSize || 10);
@@ -16,7 +16,7 @@ class CustomPagination extends Component {
     return (data.length >= (settings.pageSize || 10)) && (
       <div className="pagination">
         <div
-          className={cx('left', equals(1, currentPage) ? 'disabled' : null)}
+          className={cx('left', currentPage === 1 ? 'disabled' : null)}
           onClick={getPreviousPage}
         >
           <span className="icon icon-backward" />
@@ -40,7 +40,7 @@ class CustomPagination extends Component {
   }
 }
 
-CustomPagination.propTypes = {
+TablePagination.propTypes = {
   data: PropTypes.array,
   events: PropTypes.object,
   pageProperties: PropTypes.object,

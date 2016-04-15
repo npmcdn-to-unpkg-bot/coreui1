@@ -4,10 +4,6 @@ import TablePagination from './TablePagination';
 import TableRowSelectionPlugin from './TableRowSelectionPlugin';
 import { DefaultModules } from 'griddle-render';
 import Griddle from 'griddle-react';
-import {
-  and, always, assoc, chain, dissoc, is, isArrayLike,
-  isEmpty, keys, map, merge, or, uniq, zipObj,
-} from 'ramda';
 import compose from 'recompose/compose';
 import cx from 'classnames';
 import defaultProps from 'recompose/defaultProps';
@@ -15,6 +11,10 @@ import mapProps from 'recompose/mapProps';
 import shouldUpdate from 'recompose/shouldUpdate';
 import toClass from 'recompose/toClass';
 import withProps from 'recompose/withProps';
+import {
+  and, always, assoc, chain, dissoc, is, isArrayLike,
+  isEmpty, keys, map, merge, or, uniq, zipObj,
+} from 'ramda';
 
 const { ColumnDefinition, RowDefinition } = DefaultModules;
 const NoopComponent = toClass(() => null);
@@ -32,7 +32,7 @@ const columnIsSortable = (c, sortable) =>
 const maybeRenderDefinitions = (props) => {
   const { columns, onClick, sortable, valueField } = props;
 
-  return !valueField ? null : (
+  return valueField && (
     <RowDefinition {...{ onClick }} keyColumn={valueField}>
       {columns.map((c, i) =>
         (<ColumnDefinition {...c} key={i} sortable={columnIsSortable(c, sortable)} />)
