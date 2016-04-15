@@ -9,10 +9,10 @@ const handleClick = (onClick, onHide, e) => {
   if (is(Function, onHide)) { onHide(e); }
 };
 
-const renderButton = (events, Form, buttonData, i) => {
+const renderButton = ({ onHide }, Form, buttonData, i) => {
   const { displayText, isCancel, isDefault, isFormSubmit, name } = buttonData;
   const className = isDefault ? 'btn-primary goog-buttonset-default' : 'btn-secondary';
-  const onClick = partial(handleClick, [buttonData.onClick, (isCancel && events.onHide)]);
+  const onClick = partial(handleClick, [buttonData.onClick, (isCancel && onHide)]);
   const text = displayText || name;
 
   return isFormSubmit ?
@@ -21,37 +21,47 @@ const renderButton = (events, Form, buttonData, i) => {
 };
 
 const maybeRenderFooter = (props) => {
-  const { buttons, events, style } = props;
-  const { classNames, footerStyle } = style;
-  const { footer } = classNames;
-  const className = cx('modal-footer', { [footer]: footer, 'text-xs-right': !footer });
+  const { buttons, dialogFooterClassName, dialogFooterStyle } = props;
+  const className = cx('modal-footer', {
+    [dialogFooterClassName]: dialogFooterClassName, 'text-xs-right': !dialogFooterClassName,
+  });
   const Form = Shared.getRegisteredComponents().Form;
 
   return buttons && buttons.length && (
-      <div {...{ className }} style={footerStyle}>
-        {intersperse(' ', buttons.map(partial(renderButton, [events, Form])))}
+      <div {...{ className }} style={dialogFooterStyle}>
+        {intersperse(' ', buttons.map(partial(renderButton, [props, Form])))}
       </div>
     );
 };
 
 const ModalDialog = (props) => {
-  const { children, headerContent, style } = props;
-  const { bodyStyle, classNames, contentStyle, dialogStyle, headerStyle, titleStyle } = style;
-  const { body, content, dialog, header, title } = classNames;
+  const {
+    children, dialogBodyClassName, dialogBodyStyle, dialogClassName, dialogContentClassName,
+    dialogContentStyle, dialogHeaderClassName, dialogHeaderStyle, dialogStyle,
+    dialogTitleClassName, dialogTitleStyle, headerContent,
+  } = props;
   const Form = Shared.getRegisteredComponents().Form;
   const Container = Form ? Form.Context : 'div';
 
   return (
     <Container>
-      <div className={cx('modal-dialog', dialog)} style={dialogStyle}>
-        <div className={cx('modal-content', content)} style={contentStyle}>
-          <div className={cx('handle modal-header', header)} style={headerStyle}>
+      <div className={cx('modal-dialog', dialogClassName)} style={dialogStyle}>
+        <div className={cx('modal-content', dialogContentClassName)} style={dialogContentStyle}>
+          <div
+            className={cx('handle modal-header', dialogHeaderClassName)}
+            style={dialogHeaderStyle}
+          >
             <button aria-label="Close" className="sr-only" type="button" />
-            <h4 className={cx('handle modal-title', title)} style={titleStyle}>
+            <h4 className={cx('handle modal-title', dialogTitleClassName)} style={dialogTitleStyle}>
               {headerContent}
             </h4>
           </div>
-          <div className={cx('modal-body', body)} style={bodyStyle}>{children}</div>
+          <div
+            className={cx('modal-body', dialogBodyClassName)}
+            style={dialogBodyStyle}
+          >
+            {children}
+          </div>
           {maybeRenderFooter(props)}
         </div>
       </div>
@@ -61,8 +71,18 @@ const ModalDialog = (props) => {
 
 ModalDialog.propTypes = {
   children: PropTypes.node,
+  dialogBodyClassName: PropTypes.string,
+  dialogBodyStyle: PropTypes.object,
+  dialogClassName: PropTypes.string,
+  dialogContentClassName: PropTypes.string,
+  dialogContentStyle: PropTypes.object,
+  dialogHeaderClassName: PropTypes.string,
+  dialogHeaderStyle: PropTypes.object,
+  dialogStyle: PropTypes.object,
+  dialogTitleClassName: PropTypes.string,
+  dialogTitleStyle: PropTypes.object,
   headerContent: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-  style: PropTypes.object,
+  onHide: PropTypes.func,
 };
 
 export default ModalDialog;

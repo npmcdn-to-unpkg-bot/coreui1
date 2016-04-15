@@ -18,7 +18,7 @@ class ModalExample extends Component {
     this.setState({ showModal: !this.state.showModal })
 
   maybeRenderModal = () => this.state.showModal &&
-    <Modal events={{ onHide: this.toggleShowModal }}><div>Content</div></Modal>
+    <Modal onHide={this.toggleShowModal}><div>Content</div></Modal>
 
   render = () => (
     <div>
@@ -63,21 +63,11 @@ class ModalFormExample extends Component {
     this.setState({ showModal: !this.state.showModal })
 
   maybeRenderModal = () => this.state.showModal && (
-    <Modal {...{ buttons }}
-      events={{ onHide: this.toggleShowModal }}
-      headerContent="Modal Form Example"
-    >
-      <Form {...{ schema }}
-        defaultValue={schema.default()}
-        onSubmit={(v) => console.log(v)}
-      >
+    <Modal {...{ buttons }} headerContent="Modal Form Example" onHide={this.toggleShowModal}>
+      <Form {...{ schema }} defaultValue={schema.default()} onSubmit={(v) => console.log(v)}>
         <div className="form-group">
           <Label>First Name</Label>
-          <Field
-            autoFocus
-            name="name.first"
-            placeholder="First name"
-          />
+          <Field autoFocus name="name.first" placeholder="First name" />
           <Message for="name.first" />
         </div>
       </Form>

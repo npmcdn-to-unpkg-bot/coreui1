@@ -6,42 +6,47 @@ import cx from 'classnames';
 import defaultProps from 'recompose/defaultProps';
 import mapProps from 'recompose/mapProps';
 import withContext from 'recompose/withContext';
-import { merge, path } from 'ramda';
+import { merge } from 'ramda';
 
-const defaultModalStyle = {
+const modalStyle = {
   position: 'fixed',
   zIndex: 1040,
   top: 0, bottom: 0, left: 0, right: 0,
 };
 
-const defaultBackdropStyle = {
-  ...defaultModalStyle,
+const backdropStyle = {
+  ...modalStyle,
   zIndex: 'auto',
   backgroundColor: '#000',
   opacity: 0.4,
 };
 
 const modalProps = (props) => {
-  const { buttons, children, className, container, events, headerContent, settings, style } = props;
-  const { autoFocus, backdrop, enforceFocus, keyboard, transition } = settings;
-  const { backdropStyle, classNames } = style || {};
+  const {
+    backdrop, buttons, className, dialogBodyClassName, dialogBodyStyle, dialogClassName,
+    dialogStyle, dialogContentClassName, dialogContentStyle, dialogHeaderClassName,
+    dialogHeaderStyle, dialogTitleClassName, dialogTitleStyle, headerContent, onHide,
+  } = props;
 
-  return merge(events, {
-    autoFocus,
-    backdrop: !(backdrop === false),
-    backdropClassName: classNames.backdrop,
-    backdropStyle: backdropStyle || defaultBackdropStyle,
-    backdropTransitionTimeout: path(['backdrop', 'transitionTimeout'], settings),
-    children,
+  return merge(props, {
+    backdrop: !!backdrop,
     className: cx('modal fade in', className),
-    container,
-    containerClassName: cx('modal-open', classNames.container),
-    dialogTransitionTimeout: path(['dialog', 'transitionTimeout'], settings),
-    dialogProps: { buttons, events, headerContent, style },
-    enforceFocus,
-    keyboard,
+    dialogProps: {
+      buttons,
+      dialogBodyClassName,
+      dialogBodyStyle,
+      dialogClassName,
+      dialogStyle,
+      dialogContentClassName,
+      dialogContentStyle,
+      dialogHeaderClassName,
+      dialogHeaderStyle,
+      dialogTitleClassName,
+      dialogTitleStyle,
+      headerContent,
+      onHide,
+    },
     show: true,
-    transition,
   });
 };
 
@@ -54,10 +59,10 @@ const Modal = ({ children, dialogProps, ...rest }) => (
 Modal.propTypes = { children: PropTypes.node, dialogProps: PropTypes.object };
 
 export default compose(
-  defaultProps({ events: {}, settings: {}, style: { classNames: {} } }),
+  defaultProps({ backdropStyle }),
   withContext(
     { coreuiModalContext: PropTypes.object },
-    (props) => ({ coreuiModalContext: { onHide: props.events.onHide } })
+    ({ onHide }) => ({ coreuiModalContext: { onHide } })
   ),
   mapProps(modalProps)
 )(Modal);
