@@ -1,5 +1,5 @@
 import React from 'react';
-import { assocPath } from 'ramda';
+import { assocPath, partial } from 'ramda';
 
 const GRIDDLE_ROW_SELECTION_TOGGLED = 'GRIDDLE_ROW_SELECTION_TOGGLED';
 
@@ -21,7 +21,7 @@ const createRow = (Row) =>
     return <Row {...props} onClick={() => handleClick(props)} styles={newStyles} />;
   };
 
-const selectRow = (data, griddleKey, template) => map(partial(template, [griddleKey]), data);
+const selectRow = (data, griddleKey, template) => data.map(partial(template, [griddleKey]));
 
 const getTemplate = (griddleKey, row) => {
   const isSelected = row.get('selected');

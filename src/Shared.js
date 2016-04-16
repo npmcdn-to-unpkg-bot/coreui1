@@ -4,9 +4,10 @@ class Shared {
   }
 
   getRegisteredComponents = () => this.importedComponents;
-  
-  registerComponent = (name, component) =>
+
+  registerComponent = (name, component) => {
     this.importedComponents[name] = component;
+  }
 }
 
 const SharedInst = new Shared();
