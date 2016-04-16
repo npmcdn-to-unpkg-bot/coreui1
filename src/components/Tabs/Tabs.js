@@ -1,61 +1,66 @@
 import React, { Children, PropTypes } from 'react';
 import AriaTabPanel from 'react-aria-tabpanel';
-import cx from 'classnames';
 import compose from 'recompose/compose';
-import defaultProps from 'recompose/defaultProps';
-import mapProps from 'recompose/mapProps';
-import { assoc, evolve } from 'ramda';
+import cx from 'classnames';
+import withHandlers from 'recompose/withHandlers';
+import withState from 'recompose/withState';
+import { partial } from 'ramda';
 
-const Tab = compose(
-  defaultProps({ className: 'Tabs-tab' }),
-  mapProps((props) => evolve({
-    className: (s) => cx(s, { 'is-active': props.activeTabKey === props.tabKey }),
-  }, props))
-)(AriaTabPanel.Tab);
+const renderTabPanel = (activeTabId, { props: { children, tabKey } }) => {
+  const active = tabKey === activeTabId;
 
-const renderPanel = ({ content, id }) =>
-  <AriaTabPanel.TabPanel key={id} tabId={id}>{content}</AriaTabPanel.TabPanel>;
+  return (
+    <AriaTabPanel.TabPanel active={active} className={cx('tab-pane', { active })} tabId={tabKey}>
+      {children}
+    </AriaTabPanel.TabPanel>
+  );
+};
 
-const renderTab = ({ id, title }) => (
-  <li className="Tabs-tablistItem" key={id}>
-    <Tab {...{ id }}>{title}</Tab>
+const renderTab = (activeTabId, { props: { tabKey, text } }) => (
+  <li className="nav-item">
+    <AriaTabPanel.Tab
+      className={cx('nav-link', { active: tabKey === activeTabId })}
+      id={tabKey}
+      style={{ cursor: 'pointer', outline: 'none' }}
+      tag="span"
+    >
+      {text}
+    </AriaTabPanel.Tab>
   </li>
 );
 
-const renderData = ({ data, externalContent }) => {
-  const tabList = (
-    <AriaTabPanel.TabList key="tab-list">
-      <ul className="Tabs-tabList">{data.map(renderTab)}</ul>
+const TabsWrapper = ({ activeTabId, children: wrapperChildren, className, onChange }) => (
+  <AriaTabPanel.Wrapper {...{ activeTabId, onChange }}>
+    <AriaTabPanel.TabList>
+      <ul className={cx('nav', 'nav-tabs', className)}>
+        {Children.map(wrapperChildren, partial(renderTab, [activeTabId]))}
+      </ul>
     </AriaTabPanel.TabList>
-  );
-
-  const tabsPanel = !externalContent && (
-    <div className="Tabs-panel" key="tabs-panel">
-      {data.map(renderPanel)}
+    <div className="tab-content pad-y">
+      {Children.map(wrapperChildren, partial(renderTabPanel, [activeTabId]))}
     </div>
-  );
-
-  return [tabList, tabsPanel];
-};
-
-const toData = ({ props }) => {
-  const { children, tabKey, text } = props;
-
-  return ({ content: children, id: tabKey, title: text });
-};
-
-const normalizeChildren = (props) =>
-  assoc('data', Children.map(props.children, toData), props);
-
-const TabPane = () => null;
-
-const Tabs = (props) => (
-  <AriaTabPanel.Wrapper>
-    {renderData(Children.count(props.children) ? normalizeChildren(props) : props)}
   </AriaTabPanel.Wrapper>
 );
 
-Tabs.propTypes = { children: PropTypes.node };
+TabsWrapper.propTypes = {
+  activeTabId: PropTypes.string,
+  children: PropTypes.node,
+  className: PropTypes.string,
+  onChange: PropTypes.func,
+};
+
+const TabPane = () => null;
+
+const Tabs = compose(
+  withState('activeTabId', 'handleTabChange', props => props.activeTabKey),
+  withHandlers({
+    onChange: props => activeTab => {
+      props.handleTabChange(activeTab);
+    },
+  })
+)(TabsWrapper);
+
+Tabs.propTypes = { activeTabKey: PropTypes.string, children: PropTypes.node };
 
 Tabs.TabPane = TabPane;
 
