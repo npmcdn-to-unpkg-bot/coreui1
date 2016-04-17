@@ -56,8 +56,6 @@
   "dependencies": {
     "classnames": "^2.2.3",
     "eslint": "^2.8.0",
-    "griddle-react": "^0.4.1",
-    "griddle-render": "0.0.31",
     "ramda": "^0.21.0",
     "react-aria-tabpanel": "^4.2.1",
     "react-formal": "^0.17.0",

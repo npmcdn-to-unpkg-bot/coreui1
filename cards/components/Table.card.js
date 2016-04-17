@@ -76,13 +76,126 @@ definecard(
     <div className="row">
       <div className="col-xs-8 col-xl-4">
         <Table
+          className="table-hover"
+          columns={['Age', 'Name', 'Position']}
+          data={[
+            { id: 0, Name: 'Griffin Smith', Age: 18 },
+            { id: 1, Age: 23, Name: 'Lee Salminen' },
+            { id: 2, Age: 28, Position: 'Developer' },
+          ]}
+          onClick={(rowId, selectedRows) => console.log(rowId, selectedRows)}
+          selection
+          valueField="id"
+        />
+      </div>
+    </div>
+  </div>
+);
+
+definecard(
+  'Table Row Single Selection',
+  `
+  `,
+  <div className="container">
+    <div className="row">
+      <div className="col-xs-8 col-xl-4">
+        <Table
+          className="table-hover"
+          columns={['Age', 'Name', 'Position']}
+          data={[
+            { id: 0, Name: 'Griffin Smith', Age: 18 },
+            { id: 1, Age: 23, Name: 'Lee Salminen' },
+            { id: 2, Age: 28, Position: 'Developer' },
+          ]}
+          onClick={(v) => console.log(v)}
+          selectMultiple={false}
+          valueField="id"
+        />
+      </div>
+    </div>
+  </div>
+);
+
+definecard(
+  'Table Invalid Key Column',
+  `
+  `,
+  <div className="container">
+    <div className="row">
+      <div className="col-xs-8 col-xl-4">
+        <Table
+          className="table-hover"
+          columns={['Age', 'Name', 'Position']}
+          data={[
+            { id: 0, Name: 'Griffin Smith', Age: 18 },
+            { id: 1, Age: 23, Name: 'Lee Salminen' },
+            { id: null, Age: 28, Position: 'Developer' },
+          ]}
+          onClick={(v) => console.log(v)}
+          selectMultiple={false}
+          valueField="id"
+        />
+      </div>
+    </div>
+  </div>
+);
+
+definecard(
+  'Table Search',
+  `
+  `,
+  <div className="container">
+    <div className="row">
+      <div className="col-xs-8 col-xl-4">
+        <Table
           data={[
             { Name: 'Griffin Smith', Age: 18 },
             { Age: 23, Name: 'Lee Salminen' },
             { Age: 28, Position: 'Developer' },
           ]}
-          onClick={(v) => console.log(v)}
-          valueField="Name"
+          searchable
+        />
+      </div>
+    </div>
+  </div>
+);
+
+definecard(
+  'Table Pagination',
+  `
+  `,
+  <div className="container">
+    <div className="row">
+      <div className="col-xs-8 col-xl-4">
+        <Table
+          data={[
+            { Name: 'Griffin Smith', Age: 18 },
+            { Age: 23, Name: 'Lee Salminen' },
+            { Age: 28, Position: 'Developer' },
+          ]}
+          pageSize={2}
+          pagination
+        />
+      </div>
+    </div>
+  </div>
+);
+
+definecard(
+  'Table Search and Pagination',
+  `
+  `,
+  <div className="container">
+    <div className="row">
+      <div className="col-xs-8 col-xl-4">
+        <Table
+          data={[
+            { Name: 'Griffin Smith', Age: 18 },
+            { Age: 23, Name: 'Lee Salminen' },
+            { Age: 28, Position: 'Developer' },
+          ]}
+          pageSize={2}
+          pagination searchable
         />
       </div>
     </div>
