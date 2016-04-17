@@ -1,4 +1,4 @@
-import React from 'react/addons';
+import React from 'react';
 import CalendarInput from 'components/CalendarInput';
 import checking from 'checkers/mocha';
 import { expect } from 'chai';

@@ -1,4 +1,4 @@
-import React from 'react/addons';
+import React from 'react';
 import DateTimePickerInput from 'components/DateTimePickerInput';
 import checking from 'checkers/mocha';
 import { expect } from 'chai';

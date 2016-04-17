@@ -12,7 +12,7 @@ import lifecycle from 'recompose/lifecycle';
 import mapProps from 'recompose/mapProps';
 import toClass from 'recompose/toClass';
 import withHandlers from 'recompose/withHandlers';
-import { evolve, is, partial, path } from 'ramda';
+import { is, partial, path } from 'ramda';
 
 const handleSubmit = ({ coreuiModalContext, onSubmit }, formValue) => {
   if (!coreuiModalContext) {
@@ -63,17 +63,22 @@ const setup = () => {
 };
 
 const FormButton = compose(
-  defaultProps({ className: '', component: Button }),
-  mapProps((props) => evolve({
-    className: (s) => cx({ 'btn-primary': props.type === 'submit' }, s),
-  }, props))
+  defaultProps({ component: Button }),
+  mapProps(({ className, type, ...rest }) => ({
+    className: cx({ 'btn-primary': type === 'submit' }, className),
+    type,
+    ...rest,
+  }))
 )(RFFormButton);
 
 const FormField = defaultProps({ errorClass: 'has-danger' })(Field);
 
 const FormMessage = compose(
-  defaultProps({ className: '', errorClass: 'has-danger' }),
-  mapProps((props) => evolve({ className: (s) => cx('form-msg', s) }, props))
+  defaultProps({ errorClass: 'has-danger' }),
+  mapProps(({ className, ...rest }) => ({
+    className: cx('form-msg', className),
+    ...rest,
+  }))
 )(Message);
 
 const Form = compose(

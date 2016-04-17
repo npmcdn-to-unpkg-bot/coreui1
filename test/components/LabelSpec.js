@@ -1,4 +1,4 @@
-import React from 'react/addons';
+import React from 'react';
 import Label from 'components/Label';
 import checking from 'checkers/mocha';
 import { expect } from 'chai';

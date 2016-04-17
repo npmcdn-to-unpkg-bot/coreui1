@@ -1,4 +1,4 @@
-import React from 'react/addons';
+import React from 'react';
 import ComboboxInput from 'components/ComboboxInput';
 import checking from 'checkers/mocha';
 import { expect } from 'chai';
