@@ -1,3 +1,4 @@
+/.idea
 /cards
 /src
 /.editorconfig
@@ -7,3 +8,4 @@
 /test
 /.babelrc
 *tgz
+/.DS_Store
