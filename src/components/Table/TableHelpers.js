@@ -1,6 +1,6 @@
 import cx from 'classnames';
 import {
-  any, chain, is, isNil, keys, merge, partial,
+  any, chain, dec, is, isNil, keys, merge, partial,
   prop, reverse, splitEvery, sortBy, uniq,
 } from 'ramda';
 
@@ -21,18 +21,19 @@ const isSearchMatchingRow = (columns, searchValue, row) =>
     (row[c.id] || '').toString().toLowerCase()
       .includes(searchValue.toLowerCase()), columns);
 
-const maxPage = (data, pageSize) => splitEvery(pageSize, data).length;
+const maxPageIndex = (data, pageSize) => dec(splitEvery(pageSize, data).length);
 
 const normalizedColumns = (baseTableProps, columns) => {
   const { data, helpers, searchable, sortable } = baseTableProps;
 
   return (columns || uniq(chain(keys, data))).map((c) => {
+    const component = c.component;
     const displayName = c.displayName || c;
     const id = c.id || c;
     const isSearchable = helpers.isColumnSearchable(id, searchable);
     const isSortable = helpers.isColumnSortable(id, sortable);
 
-    return { displayName, id, isSearchable, isSortable };
+    return { component, displayName, id, isSearchable, isSortable };
   });
 };
 
@@ -64,7 +65,7 @@ const normalizedProps = (helpers, props) => {
     className: cx(helpers.tableDefaultProps().className, className),
     columns,
     data,
-    maxPage: helpers.maxPage(sortedData, pageSize),
+    maxPageIndex: helpers.maxPageIndex(sortedData, pageSize),
     searchable: !!searchable,
     selection: !!(selection && helpers.isKeyColumnValid(data, valueField)),
     sortable: !!sortable,
@@ -107,5 +108,5 @@ const toggleRow = (selectedRows, rowId) => {
 
 export default {
   currentPage, isColumnSearchable, isColumnSortable, isKeyColumnValid, isSearchMatchingRow,
-  maxPage, normalizedColumns, normalizedProps, sortedData, tableDefaultProps, toggleRow,
+  maxPageIndex, normalizedColumns, normalizedProps, sortedData, tableDefaultProps, toggleRow,
 };

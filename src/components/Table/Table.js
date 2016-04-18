@@ -14,13 +14,14 @@ import { inc, is, partial } from 'ramda';
 
 const maybeRenderPager = (baseTableProps) => {
   const {
-    maxPage, onPageChange, onNextPageClick,
-    onPrevPageClick, pageIndex, pagination,
+    maxPageIndex, onPageChange, onNextPageClick,
+    onPrevPageClick, pageIndex, prevPageIndex, pagination,
   } = baseTableProps;
 
-  const pageNumber = inc(pageIndex);
-  const nextDisabled = pageNumber === maxPage;
-  const prevDisabled = pageIndex === 0;
+  const effectivePageIndex = is(Number, pageIndex) ? pageIndex : prevPageIndex;
+  const pageNumber = inc(effectivePageIndex);
+  const nextDisabled = effectivePageIndex === maxPageIndex;
+  const prevDisabled = effectivePageIndex === 0;
 
   return pagination && (
     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -29,10 +30,13 @@ const maybeRenderPager = (baseTableProps) => {
         onClick={onPrevPageClick}
         style={{ color: prevDisabled ? '#ccc' : '#2975e9' }}
       >
-        Prev
+        <div style={{ display: 'flex', alignItems: 'middle' }}>
+          <span className="icon icon-chevron-left" />
+          <span title="Previous">Previous</span>
+        </div>
       </Button>
       <NumberPickerInput
-        max={maxPage}
+        max={inc(maxPageIndex)}
         min={1}
         onChange={onPageChange}
         style={{ maxWidth: 100 }}
@@ -43,7 +47,10 @@ const maybeRenderPager = (baseTableProps) => {
         onClick={onNextPageClick}
         style={{ color: nextDisabled ? '#ccc' : '#2975e9' }}
       >
-        Next
+        <div style={{ display: 'flex', alignItems: 'middle' }}>
+          <span title="Next">Next</span>
+          <span className="icon icon-chevron-right" />
+        </div>
       </Button>
     </div>
   );
@@ -95,6 +102,17 @@ const renderHeaderCell = (baseTableProps, c, i) => {
   );
 };
 
+const renderCell = (data, { component, id }) => {
+  const Component = component;
+  const cellData = data[id];
+
+  return (
+    <td key={id}>
+      {Component ? <Component data={cellData} /> : cellData}
+    </td>
+  )
+};
+
 const renderRow = (baseTableProps, data, i) => {
   const { columns, onRowClick, selectedRows, selection, valueField } = baseTableProps;
   const rowId = valueField && data[valueField];
@@ -105,7 +123,7 @@ const renderRow = (baseTableProps, data, i) => {
       key={valueField ? rowId : i}
       onClick={() => selection && valueField && onRowClick(data)}
     >
-      {columns.map((c) => <td key={c.id}>{data[c.id]}</td>)}
+      {columns.map(partial(renderCell, [data]))}
     </tr>
   );
 };
@@ -134,6 +152,7 @@ BaseTable.propTypes = {
   className: PropTypes.string,
   columns: PropTypes.array,
   data: PropTypes.array.isRequired,
+  maxPageIndex: PropTypes.number,
   onHeaderClick: PropTypes.func,
   onNextPageClick: PropTypes.func,
   onPageChange: PropTypes.func,

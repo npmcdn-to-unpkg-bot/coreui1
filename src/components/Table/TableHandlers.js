@@ -18,8 +18,8 @@ const handleHeaderClick = (c, props) => {
   }
 };
 
-const handleNextPageClick = ({ maxPage, pageIndex, setPageIndex }) => {
-  setPageIndex(min(maxPage, inc(pageIndex)));
+const handleNextPageClick = ({ maxPageIndex, pageIndex, setPageIndex }) => {
+  setPageIndex(min(maxPageIndex, inc(pageIndex)));
 };
 
 const handlePageChange = (v, { pageIndex, setPageIndex, setPrevPageIndex }) => {
