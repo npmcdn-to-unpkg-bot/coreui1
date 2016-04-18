@@ -10,7 +10,7 @@ definecard(
   `,
   <div className="container">
     <div className="row">
-      <div className="col-xs-8 col-xl-4">
+      <div className="col-xs-12 col-xl-8">
         <Table
           data={[
             { Name: 'Griffin Smith', Age: 18 },
@@ -29,7 +29,7 @@ definecard(
   `,
   <div className="container">
     <div className="row">
-      <div className="col-xs-8 col-xl-4">
+      <div className="col-xs-12 col-xl-8">
         <Table
           columns={['Age', 'Name']}
           data={[
@@ -49,7 +49,7 @@ definecard(
   `,
   <div className="container">
     <div className="row">
-      <div className="col-xs-8 col-xl-4">
+      <div className="col-xs-12 col-xl-8">
         <Table
           columns={[
             { displayName: 'Age', id: 'Age' },
@@ -74,7 +74,7 @@ definecard(
   `,
   <div className="container">
     <div className="row">
-      <div className="col-xs-8 col-xl-4">
+      <div className="col-xs-12 col-xl-8">
         <Table
           className="table-hover"
           columns={['Age', 'Name', 'Position']}
@@ -98,7 +98,7 @@ definecard(
   `,
   <div className="container">
     <div className="row">
-      <div className="col-xs-8 col-xl-4">
+      <div className="col-xs-12 col-xl-8">
         <Table
           className="table-hover"
           columns={['Age', 'Name', 'Position']}
@@ -122,7 +122,7 @@ definecard(
   `,
   <div className="container">
     <div className="row">
-      <div className="col-xs-8 col-xl-4">
+      <div className="col-xs-12 col-xl-8">
         <Table
           className="table-hover"
           columns={['Age', 'Name', 'Position']}
@@ -146,7 +146,7 @@ definecard(
   `,
   <div className="container">
     <div className="row">
-      <div className="col-xs-8 col-xl-4">
+      <div className="col-xs-12 col-xl-8">
         <Table
           data={[
             { Name: 'Griffin Smith', Age: 18 },
@@ -166,7 +166,7 @@ definecard(
   `,
   <div className="container">
     <div className="row">
-      <div className="col-xs-8 col-xl-4">
+      <div className="col-xs-12 col-xl-8">
         <Table
           data={[
             { Name: 'Griffin Smith', Age: 18 },
@@ -187,7 +187,7 @@ definecard(
   `,
   <div className="container">
     <div className="row">
-      <div className="col-xs-8 col-xl-4">
+      <div className="col-xs-12 col-xl-8">
         <Table
           data={[
             { Name: 'Griffin Smith', Age: 18 },
@@ -210,7 +210,7 @@ definecard(
   `,
   <div className="container">
     <div className="row">
-      <div className="col-xs-8 col-xl-4">
+      <div className="col-xs-12 col-xl-8">
         <Table
           columns={[
             { component: Bold, displayName: 'Age', id: 'Age' },
@@ -235,7 +235,7 @@ definecard(
   `,
   <div className="container">
     <div className="row">
-      <div className="col-xs-8 col-xl-4">
+      <div className="col-xs-12 col-xl-8">
         <Table
           data={[
             { Name: 'Griffin Smith', Age: 18 },

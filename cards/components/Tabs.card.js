@@ -10,7 +10,7 @@ definecard(
   `,
   <div className="container">
     <div className="row">
-      <div className="col-xs-8 col-xl-4">
+      <div className="col-xs-12 col-xl-8">
         <Tabs activeTabKey="0">
           <TabPane tabKey="0" text="Tab 1">Tab 1 Content</TabPane>
           <TabPane tabKey="1" text="Tab 2">Tab 2 Content</TabPane>
@@ -26,7 +26,7 @@ definecard(
   `,
   <div className="container">
     <div className="row">
-      <div className="col-xs-8 col-xl-4">
+      <div className="col-xs-12 col-xl-8">
         <Tabs activeTabKey="0" className="tab-bar">
           <TabPane tabKey="0" text="Tab 1">Tab 1 Content</TabPane>
           <TabPane tabKey="1" text="Tab 2">Tab 2 Content</TabPane>

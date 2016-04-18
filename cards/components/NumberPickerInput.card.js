@@ -10,7 +10,7 @@ definecard(
   `,
   <div className="container">
     <div className="row">
-      <div className="col-xs-8 col-xl-4">
+      <div className="col-xs-12 col-xl-8">
         <NumberPickerInput defaultValue={1} />
       </div>
     </div>
