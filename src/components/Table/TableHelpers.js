@@ -62,7 +62,7 @@ const normalizedProps = (helpers, props) => {
   );
 
   return merge(props, {
-    className: cx(helpers.tableDefaultProps().className, className),
+    className: cx('table', className),
     columns,
     data,
     maxPageIndex: helpers.maxPageIndex(sortedData, pageSize),
@@ -83,7 +83,6 @@ const sortedData = (baseTableProps, helpers, data) => {
 };
 
 const tableDefaultProps = () => ({
-  className: 'table',
   columns: null,
   data: [],
   pageSize: 10,

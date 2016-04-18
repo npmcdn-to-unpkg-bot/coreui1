@@ -1,5 +1,6 @@
 import { PropTypes } from 'react';
 import Button from 'components/Button';
+import TextInput from 'components/TextInput';
 import Shared from '../../Shared';
 import RFForm, {
   addInputTypes, Button as RFFormButton, Context, Field, Message, Summary, Trigger,

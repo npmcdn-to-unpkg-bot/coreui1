@@ -110,7 +110,7 @@ const renderCell = (data, { component, id }) => {
     <td key={id}>
       {Component ? <Component data={cellData} /> : cellData}
     </td>
-  )
+  );
 };
 
 const renderRow = (baseTableProps, data, i) => {
@@ -129,12 +129,12 @@ const renderRow = (baseTableProps, data, i) => {
 };
 
 const BaseTable = (props) => {
-  const { className, columns, data } = props;
+  const { className, columns, data, style } = props;
 
   return (
     <div>
       {maybeRenderSearch(props)}
-      <table {...{ className }}>
+      <table {...{ className, style }}>
         <thead><tr>{columns.map(partial(renderHeaderCell, [props]))}</tr></thead>
         <tbody>
           {data.length ?
@@ -171,6 +171,7 @@ BaseTable.propTypes = {
   sortable: PropTypes.oneOfType([PropTypes.bool, PropTypes.instanceOf(Set)]),
   sortAscending: PropTypes.bool,
   sortField: PropTypes.string,
+  style: PropTypes.object,
   valueField: PropTypes.string,
 };
 
@@ -202,6 +203,7 @@ Table.propTypes = {
   sortable: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
   sortAscending: PropTypes.bool,
   sortField: PropTypes.bool,
+  style: PropTypes.object,
   valueField: PropTypes.string,
 };
 
