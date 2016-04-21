@@ -28,7 +28,7 @@ const handleSubmit = ({ coreuiModalContext, onSubmit }, formValue) => {
 
     onSubmit(formValue, event);
 
-    if (is(Function, onHide) && !path(['detail, stopPropagation'], event)) {
+    if (is(Function, onHide) && !path(['detail', 'stopPropagation'], event)) {
       onHide(event);
     }
   }
@@ -37,7 +37,7 @@ const handleSubmit = ({ coreuiModalContext, onSubmit }, formValue) => {
 const setup = () => {
   const {
     CalendarInput, ComboboxInput, DateTimePickerInput, DropdownListInput,
-    MultiselectInput, NumberPickerInput, SelectListInput, TextInput,
+    MultiselectInput, NumberPickerInput, SelectListInput,
   } = Shared.getRegisteredComponents();
 
   const inputs = [

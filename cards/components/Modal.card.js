@@ -85,13 +85,63 @@ class ModalFormExample extends Component {
 }
 
 definecard(
-  'ModalForm',
+  'Modal Form',
   `
   `,
   <div className="container">
     <div className="row">
       <div className="col-xs-12 col-xl-8">
         <ModalFormExample />
+      </div>
+    </div>
+  </div>
+);
+
+const handleSubmit = (v, e) => {
+  console.log(e);
+  e.detail.stopPropagation = true;
+  console.log(v);
+};
+
+class ModalFormCancelPropagationExample extends Component {
+  state = { showModal: false }
+
+  toggleShowModal = () =>
+    this.setState({ showModal: !this.state.showModal })
+
+  maybeRenderModal = () => this.state.showModal && (
+    <Modal {...{ buttons }}
+      headerContent="Modal Form Stop Propagation Example"
+      onHide={this.toggleShowModal}
+    >
+      <Form {...{ schema }} defaultValue={schema.default()} onSubmit={handleSubmit}>
+        <div className="form-group">
+          <Label>First Name</Label>
+          <Field autoFocus name="name.first" placeholder="First name" />
+          <Message for="name.first" />
+        </div>
+      </Form>
+    </Modal>
+  )
+
+  render = () => (
+    <div>
+      <Button className="btn-secondary" onClick={this.toggleShowModal}>
+        Show Modal
+      </Button>
+      {this.maybeRenderModal()}
+    </div>
+  )
+}
+
+definecard(
+  'Modal Form Cancel Propagation',
+  `
+  `,
+  <div className="container">
+    <div className="row">
+      <div className="col-xs-12 col-xl-8">
+        <ModalFormCancelPropagationExample />
       </div>
     </div>
   </div>
