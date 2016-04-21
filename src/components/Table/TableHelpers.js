@@ -79,7 +79,7 @@ const sortedData = (baseTableProps, helpers, data) => {
     data;
   const xs = !sortField ? filteredData : sortBy(prop(sortField), filteredData);
 
-  return sortField && sortAscending ? xs : reverse(xs);
+  return (sortField && sortAscending === false) ? reverse(xs) : xs;
 };
 
 const tableDefaultProps = () => ({

@@ -248,3 +248,24 @@ definecard(
     </div>
   </div>
 );
+
+definecard(
+  'Table Initial Sort',
+  `
+  `,
+  <div className="container">
+    <div className="row">
+      <div className="col-xs-12 col-xl-8">
+        <Table
+          data={[
+            { Name: 'Griffin Smith', Age: 23 },
+            { Age: 18, Name: 'Lee Salminen' },
+            { Age: 28, Position: 'Developer' },
+          ]}
+          sortAscending={false}
+          sortField="Age"
+        />
+      </div>
+    </div>
+  </div>
+);
