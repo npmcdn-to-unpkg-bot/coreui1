@@ -80,3 +80,5 @@ jspm_packages
 
 /lib/
 *.tgz
+/cards/public/build
+/styleguide/build/bundle.js

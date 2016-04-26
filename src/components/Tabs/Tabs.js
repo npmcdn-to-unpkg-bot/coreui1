@@ -51,7 +51,7 @@ TabsWrapper.propTypes = {
 
 const TabPane = () => null;
 
-const Tabs = compose(
+const TabsBase = compose(
   withState('activeTabId', 'handleTabChange', props => props.activeTabKey),
   withHandlers({
     onChange: props => activeTab => {
@@ -59,6 +59,8 @@ const Tabs = compose(
     },
   })
 )(TabsWrapper);
+
+const Tabs = (props) => <TabsBase {...props}>{props.children}</TabsBase>;
 
 Tabs.propTypes = { activeTabKey: PropTypes.string, children: PropTypes.node };
 

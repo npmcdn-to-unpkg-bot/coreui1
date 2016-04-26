@@ -56,6 +56,10 @@ const Modal = ({ children, dialogProps, ...rest }) => (
   </ReactOverlaysModal>
 );
 
+Modal.defaultProps = { className: 'modal fade in' };
+
+Modal.displayName = 'Modal';
+
 Modal.propTypes = { children: PropTypes.node, dialogProps: PropTypes.object };
 
 export default compose(

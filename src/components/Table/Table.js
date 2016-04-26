@@ -175,7 +175,7 @@ BaseTable.propTypes = {
   valueField: PropTypes.string,
 };
 
-const Table = compose(
+const TableBase = compose(
   defaultProps(tableHelpers.tableDefaultProps()),
   withState('pageIndex', 'setPageIndex', 0),
   withState('prevPageIndex', 'setPrevPageIndex', 0),
@@ -186,6 +186,10 @@ const Table = compose(
   mapProps(partial(tableHelpers.normalizedProps, [tableHelpers])),
   withHandlers(tableHandlers(tableHelpers))
 )(BaseTable);
+
+const Table = (props) => <TableBase {...props}>{props.children}</TableBase>;
+
+Table.displayName = 'Table';
 
 Table.propTypes = {
   className: PropTypes.string,
@@ -202,7 +206,7 @@ Table.propTypes = {
   selectMultiple: PropTypes.bool,
   sortable: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
   sortAscending: PropTypes.bool,
-  sortField: PropTypes.bool,
+  sortField: PropTypes.string,
   style: PropTypes.object,
   valueField: PropTypes.string,
 };

@@ -1,4 +1,4 @@
-import { PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import Button from 'components/Button';
 import TextInput from 'components/TextInput';
 import Shared from '../../Shared';
@@ -82,19 +82,29 @@ const FormMessage = compose(
   }))
 )(Message);
 
-const Form = compose(
+const FormBase = compose(
   getContext({ coreuiModalContext: PropTypes.object }),
   withHandlers({ onSubmit: (props) => partial(handleSubmit, [props]) }),
   lifecycle(setup, Function.prototype)
 )(RFForm);
 
-Form.addInputTypes = addInputTypes;
+const Form = (props) => <FormBase {...props}>{props.children}</FormBase>;
+
 Form.Button = FormButton;
 Form.Context = Context;
 Form.Field = FormField;
 Form.Message = FormMessage;
 Form.Summary = Summary;
 Form.Trigger = Trigger;
+
+Form.addInputTypes = addInputTypes;
+
+Form.displayName = 'Form';
+
+Form.propTypes = {
+  className: PropTypes.string,
+  children: PropTypes.node,
+};
 
 Shared.registerComponent('Form', Form);
 

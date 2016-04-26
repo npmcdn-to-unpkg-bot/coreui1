@@ -1,11 +1,21 @@
-import cx from 'classnames';
+import React, { PropTypes } from 'react';
+import cx from 'classnames/dedupe';
 import compose from 'recompose/compose';
-import defaultProps from 'recompose/defaultProps';
 import mapProps from 'recompose/mapProps';
 
-const Button = compose(
-  defaultProps({ className: 'btn' }),
+const ButtonBase = compose(
   mapProps(({ className, ...rest }) => ({ className: cx('btn', className), ...rest }))
 )('button');
+
+const Button = (props) => <ButtonBase {...props}>{props.children}</ButtonBase>;
+
+Button.defaultProps = { className: 'btn' };
+
+Button.displayName = 'Button';
+
+Button.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+};
 
 export default Button;
