@@ -6,7 +6,7 @@ Platform Core UI: Components & Other Reusable Elements
 `npm install coreui`
 
 ## API Reference
-[docs](http://platform-coreui-resources.s3-website-us-west-2.amazonaws.com/docs/)
+[styleguide](http://platform-coreui-resources.s3-website-us-west-2.amazonaws.com/styleguide/)
 
 ## Developer Setup
 ```
