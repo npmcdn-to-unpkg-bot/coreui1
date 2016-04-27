@@ -3,7 +3,6 @@ import ModalDialog from './ModalDialog';
 import ReactOverlaysModal from 'react-overlays/lib/Modal';
 import compose from 'recompose/compose';
 import cx from 'classnames';
-import defaultProps from 'recompose/defaultProps';
 import mapProps from 'recompose/mapProps';
 import withContext from 'recompose/withContext';
 import { merge } from 'ramda';
@@ -50,23 +49,33 @@ const modalProps = (props) => {
   });
 };
 
-const Modal = ({ children, dialogProps, ...rest }) => (
+const ModalBase = ({ children, dialogProps, ...rest }) => (
   <ReactOverlaysModal {...rest}>
     <ModalDialog {...dialogProps}>{children}</ModalDialog>
   </ReactOverlaysModal>
 );
 
-Modal.defaultProps = { className: 'modal fade in' };
+ModalBase.propTypes = { children: PropTypes.node, dialogProps: PropTypes.object };
 
-Modal.displayName = 'Modal';
-
-Modal.propTypes = { children: PropTypes.node, dialogProps: PropTypes.object };
-
-export default compose(
-  defaultProps({ backdropStyle }),
+const Modal = compose(
   withContext(
     { coreuiModalContext: PropTypes.object },
     ({ onHide }) => ({ coreuiModalContext: { onHide } })
   ),
   mapProps(modalProps)
-)(Modal);
+)(ModalBase);
+
+Modal.defaultProps = {
+  backdrop: true,
+  backdropStyle,
+  className: 'modal fade in',
+};
+
+Modal.displayName = 'Modal';
+
+Modal.propTypes = {
+  children: PropTypes.node,
+  dialogProps: PropTypes.object,
+};
+
+export default Modal;
