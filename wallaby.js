@@ -1,23 +1,10 @@
 module.exports = function (wallaby) {
   return {
-    files: [
-      { pattern: 'src/**/*.js' },
-    ],
+    compilers: { '**/*.js': wallaby.compilers.babel() },
 
-    tests: [
-      { pattern: 'test/**/*Spec.js' },
-    ],
+    env: { params: { env: 'NODE_PATH=src' }, type: 'node' },
 
-    compilers: {
-      '**/*.js': wallaby.compilers.babel(),
-    },
-
-    env: {
-      params: {
-        env: 'NODE_PATH=src',
-      },
-      type: 'node',
-    },
+    files: [{ pattern: 'src/**/*.js' }],
 
     setup: function () {
       const chai = require('chai');
@@ -25,5 +12,7 @@ module.exports = function (wallaby) {
       chai.use(require('dirty-chai'));
       chai.use(require('skin-deep/chai'));
     },
+
+    tests: [{ pattern: 'test/**/*Spec.js' }],
   };
 };

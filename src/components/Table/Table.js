@@ -61,13 +61,16 @@ const maybeRenderSearch = (baseTableProps) => {
 
   return searchable && (
     <div className="form-group">
-      <TextInput
-        onChange={onSearchChange}
-        placeholder={searchPlaceholder}
-        style={{ maxWidth: 300 }}
-        type="search"
-        value={searchValue}
-      />
+      <div className="search">
+        <TextInput
+          className="search-input"
+          onChange={onSearchChange}
+          placeholder={searchPlaceholder}
+          style={{ maxWidth: 300 }}
+          type="search"
+          value={searchValue}
+        />
+      </div>
     </div>
   );
 };
