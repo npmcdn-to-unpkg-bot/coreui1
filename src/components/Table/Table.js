@@ -192,6 +192,7 @@ const Table = (props) => <TableBase {...props}>{props.children}</TableBase>;
 Table.displayName = 'Table';
 
 Table.propTypes = {
+  children: PropTypes.node,
   className: PropTypes.string,
   columns: PropTypes.array,
   data: PropTypes.array.isRequired,
