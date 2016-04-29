@@ -6,14 +6,18 @@ module.exports = {
   components: './src/components/**/*.js',
   serverPort: 3001,
   updateWebpackConfig: function(webpackConfig, env) {
-    // Your source files folder or array of folders, should not include node_modules
+    webpackConfig.entry.push(path.join(__dirname, 'styleguide/css/apollo.css'));
+    webpackConfig.entry.push(path.join(__dirname, 'styleguide/css/react-widgets.css'));
     let dir = path.join(__dirname, 'src');
+    let styleguideDir = path.join(__dirname, 'styleguide');
     webpackConfig.module.loaders.push(
-      // Babel loader will use your project’s .babelrc
+      { test: /\.jsx?$/, include: dir, loader: 'babel' },
+      { test: /\.css$/, include: styleguideDir, loader: 'style-loader!css-loader' },
+      { test: /\.(png|gif|jpg|jpeg)$/, include: styleguideDir, loader: 'file-loader' },
       {
-        test: /\.jsx?$/,
-        include: dir,
-        loader: 'babel',
+        test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
+        include: styleguideDir,
+        loader: 'file-loader',
       }
     );
     return webpackConfig;

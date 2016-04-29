@@ -57,13 +57,15 @@ const ModalBase = ({ children, dialogProps, ...rest }) => (
 
 ModalBase.propTypes = { children: PropTypes.node, dialogProps: PropTypes.object };
 
-const Modal = compose(
+const BaseModal = compose(
   withContext(
     { coreuiModalContext: PropTypes.object },
     ({ onHide }) => ({ coreuiModalContext: { onHide } })
   ),
   mapProps(modalProps)
 )(ModalBase);
+
+const Modal = (props) => <BaseModal {...props}>{props.children}</BaseModal>;
 
 Modal.defaultProps = {
   backdrop: true,
