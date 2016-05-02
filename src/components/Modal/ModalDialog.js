@@ -23,7 +23,7 @@ const renderButton = ({ onHide }, Form, buttonData, i) => {
 const maybeRenderFooter = (props) => {
   const { buttons, dialogFooterClassName, dialogFooterStyle } = props;
   const className = cx('modal-footer', {
-    [dialogFooterClassName]: dialogFooterClassName, 'text-xs-right': !dialogFooterClassName,
+    [dialogFooterClassName]: !!dialogFooterClassName, 'text-xs-right': !dialogFooterClassName,
   });
   const Form = Shared.getRegisteredComponents().Form;
 
@@ -35,30 +35,34 @@ const maybeRenderFooter = (props) => {
 };
 
 const ModalDialog = (props) => {
-  const {
-    children, dialogBodyClassName, dialogBodyStyle, dialogClassName, dialogContentClassName,
-    dialogContentStyle, dialogHeaderClassName, dialogHeaderStyle, dialogStyle,
-    dialogTitleClassName, dialogTitleStyle, headerContent,
-  } = props;
+  const { children, headerContent, sheet, theme } = props;
   const Form = Shared.getRegisteredComponents().Form;
   const Container = Form ? Form.Context : 'div';
+  const systemClasses = sheet.classes;
+  const { classes: themeClasses, styles: themeStyles } = theme;
 
   return (
     <Container>
-      <div className={cx('modal-dialog', dialogClassName)} style={dialogStyle}>
-        <div className={cx('modal-content', dialogContentClassName)} style={dialogContentStyle}>
+      <div className={cx(systemClasses.dialog, themeClasses.dialog)} style={themeStyles.dialog}>
+        <div
+          className={cx(systemClasses.dialogContent, themeClasses.dialogContent)}
+          style={themeStyles.dialogContent}
+        >
           <div
-            className={cx('handle modal-header', dialogHeaderClassName)}
-            style={dialogHeaderStyle}
+            className={cx(systemClasses.dialogHeader, themeClasses.dialogHeader)}
+            style={themeStyles.dialogHeader}
           >
             <button aria-label="Close" className="sr-only" type="button" />
-            <h4 className={cx('handle modal-title', dialogTitleClassName)} style={dialogTitleStyle}>
+            <h4
+              className={cx(systemClasses.dialogTitle, themeClasses.dialogTitle)}
+              style={themeStyles.dialogTitle}
+            >
               {headerContent}
             </h4>
           </div>
           <div
-            className={cx('modal-body', dialogBodyClassName)}
-            style={dialogBodyStyle}
+            className={cx(systemClasses.dialogBody, themeClasses.dialogBody)}
+            style={themeStyles.dialogBody}
           >
             {children}
           </div>
@@ -71,18 +75,10 @@ const ModalDialog = (props) => {
 
 ModalDialog.propTypes = {
   children: PropTypes.node,
-  dialogBodyClassName: PropTypes.string,
-  dialogBodyStyle: PropTypes.object,
-  dialogClassName: PropTypes.string,
-  dialogContentClassName: PropTypes.string,
-  dialogContentStyle: PropTypes.object,
-  dialogHeaderClassName: PropTypes.string,
-  dialogHeaderStyle: PropTypes.object,
-  dialogStyle: PropTypes.object,
-  dialogTitleClassName: PropTypes.string,
-  dialogTitleStyle: PropTypes.object,
   headerContent: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   onHide: PropTypes.func,
+  sheet: PropTypes.object,
+  theme: PropTypes.object,
 };
 
 export default ModalDialog;

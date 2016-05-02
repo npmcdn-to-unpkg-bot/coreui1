@@ -1,20 +1,22 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import Button from 'components/Button';
 import TextInput from 'components/TextInput';
 import Shared from '../../Shared';
+import defaultTheme from 'theme/components/Form';
 import RFForm, {
   addInputTypes, Button as RFFormButton, Context, Field, Message, Summary, Trigger,
 } from 'react-formal';
 import compose from 'recompose/compose';
-import cx from 'classnames';
+import cx from 'classnames/dedupe';
 import defaultProps from 'recompose/defaultProps';
 import expr from 'property-expr';
 import getContext from 'recompose/getContext';
-import lifecycle from 'recompose/lifecycle';
 import mapProps from 'recompose/mapProps';
 import toClass from 'recompose/toClass';
 import withHandlers from 'recompose/withHandlers';
-import { is, partial, path as rPath } from 'ramda';
+import { is, partial, merge, path as rPath } from 'ramda';
+
+const systemStyles = { };
 
 const handleSubmit = ({ coreuiModalContext, onSubmit }, formValue) => {
   if (!coreuiModalContext) {
@@ -83,13 +85,29 @@ const FormMessage = compose(
   }))
 )(Message);
 
-const FormBase = compose(
-  getContext({ coreuiModalContext: PropTypes.object }),
-  withHandlers({ onSubmit: (props) => partial(handleSubmit, [props]) }),
-  lifecycle(setup, Function.prototype)
-)(RFForm);
+class FormBase extends Component {
+  componentWillMount() { setup(); }
 
-const Form = (props) => <FormBase {...props}>{props.children}</FormBase>;
+  render() {
+    const props = this.props;
+
+    return <RFForm {...props}>{props.children}</RFForm>;
+  }
+}
+
+const FormContainer = compose(
+  getContext({ coreuiModalContext: PropTypes.object }),
+  mapProps(({ className, sheet, style, theme, ...rest }) => ({
+    className: cx(sheet.classes.form, theme.classes.form, className),
+    style: merge(theme.styles.form, style),
+    ...rest,
+  })),
+  withHandlers({ onSubmit: (props) => partial(handleSubmit, [props]) }),
+)(FormBase);
+
+const StyledForm = Shared.useSheet(FormContainer, systemStyles);
+
+const Form = (props) => <StyledForm {...props}>{props.children}</StyledForm>;
 
 Form.Button = FormButton;
 Form.Context = Context;
@@ -100,11 +118,16 @@ Form.Trigger = Trigger;
 
 Form.addInputTypes = addInputTypes;
 
+const classes = defaultTheme.classes;
+const options = defaultTheme.options;
+const styles = defaultTheme.styles;
+
 Form.defaultProps = {
   component: 'form',
   delay: 300,
   getter: (path, model) => (path ? expr.getter(path, true)(model || {}) : model),
   strict: false,
+  theme: { classes, options, styles },
 };
 
 Form.displayName = 'Form';
@@ -270,6 +293,8 @@ Form.propTypes = {
    */
   strict: PropTypes.bool,
 
+  theme: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
+
   /**
    * Form value object, can be left [uncontrolled](/controllables);
    * use the `defaultValue` prop to initialize an uncontrolled form.
@@ -277,11 +302,11 @@ Form.propTypes = {
   value: PropTypes.object,
 };
 
-Shared.registerComponent('Form', Form);
-
 export {
   addInputTypes, FormButton as Button, Context, FormField as Field,
   FormMessage as Message, Summary, Trigger,
 };
+
+Shared.registerComponent('Form', Form);
 
 export default Form;

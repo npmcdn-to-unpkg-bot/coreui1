@@ -1,8 +1,27 @@
 import React, { PropTypes } from 'react';
 import Shared from '../../Shared';
 import RWDropdownList from 'react-widgets/lib/DropdownList';
+import defaultTheme from 'theme/components/DropdownListInput';
+import cx from 'classnames/dedupe';
+import mapProps from 'recompose/mapProps';
+import { merge } from 'ramda';
 
-const DropdownListInput = (props) => <RWDropdownList {...props}>{props.children}</RWDropdownList>;
+const systemStyles = { };
+
+const DropdownListInputContainer = mapProps(({ className, sheet, style, theme, ...rest }) => ({
+  className: cx(sheet.classes.dropdownListInput, theme.classes.dropdownListInput, className),
+  style: merge(theme.styles.dropdownListInput, style),
+  ...rest,
+}))(RWDropdownList);
+
+const StyledDropdownListInput = Shared.useSheet(DropdownListInputContainer, systemStyles);
+
+const DropdownListInput = (props) =>
+  <StyledDropdownListInput {...props}>{props.children}</StyledDropdownListInput>;
+
+const classes = defaultTheme.classes;
+const options = defaultTheme.options;
+const styles = defaultTheme.styles;
 
 DropdownListInput.defaultProps = {
   busy: false,
@@ -15,6 +34,7 @@ DropdownListInput.defaultProps = {
     open: 'Open Dropdown',
   },
   minLength: 1,
+  theme: { classes, options, styles },
 };
 
 DropdownListInput.displayName = 'DropdownListInput';
@@ -127,6 +147,8 @@ DropdownListInput.propTypes = {
    * Specify which data item field to display in the DropdownListInput and selected item. The `textField` prop may also also used as to find an item in the list as you type. Providing an accessor function allows for computed text values
    */
   textField: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+
+  theme: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   /**
    * The current value of the {widgetName}. This can be an object (such as a member of the `data` array) or a primitive value, hinted to by the `valueField`. The widget value does not need to be in the `data` array; widgets can have values that are not in their list.
    */

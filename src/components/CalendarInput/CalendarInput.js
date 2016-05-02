@@ -1,11 +1,30 @@
 import React, { PropTypes } from 'react';
 import Shared from '../../Shared';
 import RWCalendar from 'react-widgets/lib/Calendar';
+import defaultTheme from 'theme/components/CalendarInput';
+import cx from 'classnames/dedupe';
+import mapProps from 'recompose/mapProps';
+import { merge } from 'ramda';
+
+const systemStyles = { };
+
+const CalendarInputContainer = mapProps(({ className, sheet, style, theme, ...rest }) => ({
+  className: cx(sheet.classes.calendarInput, theme.classes.calendarInput, className),
+  style: merge(theme.styles.calendarInput, style),
+  ...rest,
+}))(RWCalendar);
+
+const StyledCalendarInput = Shared.useSheet(CalendarInputContainer, systemStyles);
 
 /**
  * You must configure a [localizer](http://jquense.github.io/react-widgets/docs/#/i18n) to use this component!
  */
-const CalendarInput = (props) => <RWCalendar {...props}>{props.children}</RWCalendar>;
+const CalendarInput = (props) =>
+  <StyledCalendarInput {...props}>{props.children}</StyledCalendarInput>;
+
+const classes = defaultTheme.classes;
+const options = defaultTheme.options;
+const styles = defaultTheme.styles;
 
 CalendarInput.defaultProps = {
   finalView: 'century',
@@ -13,6 +32,7 @@ CalendarInput.defaultProps = {
   initialView: 'month',
   isRtl: false,
   messages: { moveBack: 'navigate back', moveForward: 'navigate forward' },
+  theme: { classes, options, styles },
 };
 
 CalendarInput.displayName = 'CalendarInput';
@@ -22,7 +42,9 @@ CalendarInput.propTypes = {
    * A formatter for century, the default formats the first and last year of the century like: 1900 - 1999.
    */
   centuryFormat: PropTypes.string,
+
   children: PropTypes.node,
+
   culture: PropTypes.string,
   /**
    * Default current date at which the calendar opens. If none is provided, opens at today's date or the `value` date (if any).
@@ -46,6 +68,7 @@ CalendarInput.propTypes = {
    * A formatter for decade, the default formats the first and last year of the decade like: 2000 - 2009.
    */
   decadeFormat: PropTypes.string,
+
   disabled: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
   /**
    * The highest level view the calendar can navigate up to. This value should be higher than `initialView`
@@ -109,7 +132,10 @@ CalendarInput.propTypes = {
    * Callback fired when the Calendar navigates between views, or forward and backwards in time.
    */
   onNavigate: PropTypes.func,
+
   readOnly: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
+
+  theme: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   /**
    * The current selected date, should be a Date object or null.
    */

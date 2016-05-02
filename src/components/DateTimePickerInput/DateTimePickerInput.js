@@ -1,6 +1,20 @@
 import React, { PropTypes } from 'react';
 import Shared from '../../Shared';
 import RWDateTimePicker from 'react-widgets/lib/DateTimePicker';
+import defaultTheme from 'theme/components/DateTimePickerInput';
+import cx from 'classnames/dedupe';
+import mapProps from 'recompose/mapProps';
+import { merge } from 'ramda';
+
+const systemStyles = { };
+
+const DateTimePickerInputContainer = mapProps(({ className, sheet, style, theme, ...rest }) => ({
+  className: cx(sheet.classes.dateTimePickerInput, theme.classes.dateTimePickerInput, className),
+  style: merge(theme.styles.dateTimePickerInput, style),
+  ...rest,
+}))(RWDateTimePicker);
+
+const StyledDateTimePickerInput = Shared.useSheet(DateTimePickerInputContainer, systemStyles);
 
 /**
  * You must configure a localizer to use this component!
@@ -8,7 +22,11 @@ import RWDateTimePicker from 'react-widgets/lib/DateTimePicker';
  * Dates are never mutated but always return and operate on a new Date instance. When the `date` prop is used the DateTimePickerInput will pass through the relevant props to the Calendar Widget and Calendar keyboard navigation keys will also work.
  */
 const DateTimePickerInput = (props) =>
-  <RWDateTimePicker {...props}>{props.children}</RWDateTimePicker>;
+  <StyledDateTimePickerInput {...props}>{props.children}</StyledDateTimePickerInput>;
+
+const classes = defaultTheme.classes;
+const options = defaultTheme.options;
+const styles = defaultTheme.styles;
 
 DateTimePickerInput.defaultProps = {
   calendar: true,
@@ -21,6 +39,7 @@ DateTimePickerInput.defaultProps = {
   messages: { calendarButton: 'Select Date', timeButton: 'Select Time' },
   min: new Date(1900, 0, 1),
   step: 30,
+  theme: { classes, options, styles },
   time: true,
 };
 
@@ -173,6 +192,8 @@ DateTimePickerInput.propTypes = {
    * The amount of minutes between each entry in the time list.
    */
   step: PropTypes.number,
+
+  theme: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   /**
    * Whether to show the time picker button.
    */

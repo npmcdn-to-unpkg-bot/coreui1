@@ -1,10 +1,15 @@
 import React, { Children, PropTypes } from 'react';
+import Shared from '../../Shared';
 import AriaTabPanel from 'react-aria-tabpanel';
+import defaultTheme from 'theme/components/Tabs';
 import compose from 'recompose/compose';
-import cx from 'classnames';
+import cx from 'classnames/dedupe';
+import mapProps from 'recompose/mapProps';
 import withHandlers from 'recompose/withHandlers';
 import withState from 'recompose/withState';
-import { partial } from 'ramda';
+import { merge, partial } from 'ramda';
+
+const systemStyles = { };
 
 const renderTabPanel = (activeTabId, { props: { children, tabKey } }) => {
   const active = tabKey === activeTabId;
@@ -51,20 +56,45 @@ TabsWrapper.propTypes = {
 
 const TabPane = () => null;
 
-const TabsBase = compose(
+const TabsContainer = compose(
   withState('activeTabId', 'handleTabChange', props => props.activeTabKey),
   withHandlers({
     onChange: props => activeTab => {
       props.handleTabChange(activeTab);
     },
-  })
+  }),
+  mapProps(({ className, sheet, style, theme, ...rest }) => ({
+    className: cx(sheet.classes.tabs, theme.classes.tabs, className),
+    style: merge(theme.styles.tabs, style),
+    ...rest,
+  }))
 )(TabsWrapper);
 
-const Tabs = (props) => <TabsBase {...props}>{props.children}</TabsBase>;
+const StyledTabs = Shared.useSheet(TabsContainer, systemStyles);
 
-Tabs.propTypes = { activeTabKey: PropTypes.string, children: PropTypes.node };
+const Tabs = (props) =>
+  <StyledTabs {...props}>{props.children}</StyledTabs>;
+
+const classes = defaultTheme.classes;
+const options = defaultTheme.options;
+const styles = defaultTheme.styles;
+
+Tabs.defaultProps = { theme: { classes, options, styles } };
+
+Tabs.displayName = 'Tabs';
+
+Tabs.propTypes = {
+  activeTabKey: PropTypes.string,
+
+  children: PropTypes.node,
+
+  theme: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
+};
 
 Tabs.TabPane = TabPane;
 
 export { TabPane };
+
+Shared.registerComponent('Tabs', Tabs);
+
 export default Tabs;

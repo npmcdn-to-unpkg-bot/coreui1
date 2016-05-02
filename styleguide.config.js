@@ -1,16 +1,16 @@
-'use strict';
-
-var path = require('path');
+const path = require('path');
 module.exports = {
   title: 'Core UI Style Guide',
   components: './src/components/**/*.js',
-  serverPort: 3001,
-  updateWebpackConfig: function(webpackConfig, env) {
-    webpackConfig.entry.push(path.join(__dirname, 'styleguide/css/apollo.css'));
-    webpackConfig.entry.push(path.join(__dirname, 'styleguide/css/react-widgets.css'));
-    let dir = path.join(__dirname, 'src');
-    let styleguideDir = path.join(__dirname, 'styleguide');
-    webpackConfig.module.loaders.push(
+  serverPort: 3003,
+  updateWebpackConfig: function (webpackConfig, env) {
+    const config = Object.assign({}, webpackConfig);
+
+    config.entry.push(path.join(__dirname, 'styleguide/css/apollo.css'));
+    config.entry.push(path.join(__dirname, 'styleguide/css/react-widgets.css'));
+    const dir = path.join(__dirname, 'src');
+    const styleguideDir = path.join(__dirname, 'styleguide');
+    config.module.loaders.push(
       { test: /\.jsx?$/, include: dir, loader: 'babel' },
       { test: /\.css$/, include: styleguideDir, loader: 'style-loader!css-loader' },
       { test: /\.(png|gif|jpg|jpeg)$/, include: styleguideDir, loader: 'file-loader' },
@@ -20,6 +20,16 @@ module.exports = {
         loader: 'file-loader',
       }
     );
-    return webpackConfig;
+
+    if (process.env.HOT) {
+      config.module.loaders[0].query.plugins.push('react-transform');
+      config.module.loaders[0].query.extra = {
+        'react-transform': [{
+          target: 'react-transform-hmr',
+          locals: ['module'],
+        }],
+      };
+    }
+    return config;
   },
 };

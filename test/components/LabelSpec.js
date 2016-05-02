@@ -10,7 +10,6 @@ describe('Label', () => {
   it('should render a ReactElement', () => {
     const tree = sd.shallowRender(<Label>Title</Label>);
     const vdom = tree.getRenderOutput();
-    expect(vdom).to.have.property('type', 'label');
     expect(vdom.props).to.have.property('children', 'Title');
   });
 });

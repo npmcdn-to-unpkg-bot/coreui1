@@ -10,11 +10,11 @@ definecard('Button Colors',
   <div>
     <Button>Default</Button>
     &nbsp;
-    <Button className="btn-primary">Primary</Button>
+    <Button type="primary">Primary</Button>
     &nbsp;
-    <Button className="btn-secondary">Secondary</Button>
+    <Button type="secondary">Secondary</Button>
     &nbsp;
-    <Button className="btn-link">Link</Button>
+    <Button type="link">Link</Button>
   </div>
 );
 
@@ -26,8 +26,8 @@ definecard('Button States',
   `
   ,
   <div>
-    <Button className="btn-primary disabled">Primary</Button>
+    <Button disabled type="primary">Primary</Button>
     &nbsp;
-    <Button className="btn-secondary disabled">Secondary</Button>
+    <Button disabled type="secondary">Secondary</Button>
   </div>
 );

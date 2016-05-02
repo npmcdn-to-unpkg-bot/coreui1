@@ -1,16 +1,18 @@
 import React, { PropTypes } from 'react';
 import Button from 'components/Button';
 import NumberPickerInput from 'components/NumberPickerInput';
+import Shared from '../../Shared';
 import TextInput from 'components/TextInput';
 import tableHandlers from './TableHandlers';
 import tableHelpers from './TableHelpers';
 import compose from 'recompose/compose';
-import cx from 'classnames';
-import defaultProps from 'recompose/defaultProps';
+import cx from 'classnames/dedupe';
 import mapProps from 'recompose/mapProps';
 import withHandlers from 'recompose/withHandlers';
 import withState from 'recompose/withState';
-import { inc, is, partial } from 'ramda';
+import { inc, is, merge, partial } from 'ramda';
+
+const systemStyles = { };
 
 const maybeRenderPager = (baseTableProps) => {
   const {
@@ -131,7 +133,7 @@ const renderRow = (baseTableProps, data, i) => {
   );
 };
 
-const BaseTable = (props) => {
+const TableBase = (props) => {
   const { className, columns, data, style } = props;
 
   return (
@@ -151,7 +153,7 @@ const BaseTable = (props) => {
   );
 };
 
-BaseTable.propTypes = {
+TableBase.propTypes = {
   className: PropTypes.string,
   columns: PropTypes.array,
   data: PropTypes.array.isRequired,
@@ -178,19 +180,28 @@ BaseTable.propTypes = {
   valueField: PropTypes.string,
 };
 
-const TableBase = compose(
-  defaultProps(tableHelpers.tableDefaultProps()),
+const TableContainer = compose(
   withState('pageIndex', 'setPageIndex', 0),
   withState('prevPageIndex', 'setPrevPageIndex', 0),
   withState('searchValue', 'setSearchValue', ''),
   withState('selectedRows', 'setSelectedRows', (props) => new Set(props.selectedRows)),
   withState('sortAscending', 'setSortAscending', (props) => props.sortAscending),
   withState('sortField', 'setSortField', (props) => props.sortField),
+  mapProps(({ className, sheet, style, theme, ...rest }) => ({
+    className: cx(sheet.classes.table, theme.classes.table, className),
+    style: merge(theme.styles.table, style),
+    ...rest,
+  })),
   mapProps(partial(tableHelpers.normalizedProps, [tableHelpers])),
   withHandlers(tableHandlers(tableHelpers))
-)(BaseTable);
+)(TableBase);
 
-const Table = (props) => <TableBase {...props}>{props.children}</TableBase>;
+const StyledTable = Shared.useSheet(TableContainer, systemStyles);
+
+const Table = (props) =>
+  <StyledTable {...props}>{props.children}</StyledTable>;
+
+Table.defaultProps = tableHelpers.tableDefaultProps();
 
 Table.displayName = 'Table';
 
@@ -212,7 +223,10 @@ Table.propTypes = {
   sortAscending: PropTypes.bool,
   sortField: PropTypes.string,
   style: PropTypes.object,
+  theme: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   valueField: PropTypes.string,
 };
+
+Shared.registerComponent('Table', Table);
 
 export default Table;

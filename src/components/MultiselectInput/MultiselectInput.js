@@ -1,11 +1,30 @@
 import React, { PropTypes } from 'react';
 import Shared from '../../Shared';
 import RWMultiselect from 'react-widgets/lib/Multiselect';
+import defaultTheme from 'theme/components/MultiselectInput';
+import cx from 'classnames/dedupe';
+import mapProps from 'recompose/mapProps';
+import { merge } from 'ramda';
+
+const systemStyles = { };
+
+const MultiselectInputContainer = mapProps(({ className, sheet, style, theme, ...rest }) => ({
+  className: cx(sheet.classes.multiselectInput, theme.classes.multiselectInput, className),
+  style: merge(theme.styles.multiselectInput, style),
+  ...rest,
+}))(RWMultiselect);
+
+const StyledMultiselectInput = Shared.useSheet(MultiselectInputContainer, systemStyles);
 
 /**
  * A select listbox alternative
  */
-const MultiselectInput = (props) => <RWMultiselect {...props}>{props.children}</RWMultiselect>;
+const MultiselectInput = (props) =>
+  <StyledMultiselectInput {...props}>{props.children}</StyledMultiselectInput>;
+
+const classes = defaultTheme.classes;
+const options = defaultTheme.options;
+const styles = defaultTheme.styles;
 
 MultiselectInput.defaultProps = {
   busy: false,
@@ -19,6 +38,7 @@ MultiselectInput.defaultProps = {
     emptyList: 'There are no items in this list',
   },
   minLength: 1,
+  theme: { classes, options, styles },
 };
 
 MultiselectInput.displayName = 'MultiselectInput';
@@ -136,6 +156,8 @@ MultiselectInput.propTypes = {
    * Specify which data item field to display in the $MultiselectInput and selected item. The `textField` prop may also also used as to find an item in the list as you type. Providing an accessor function allows for computed text values
    */
   textField: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+
+  theme: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   /**
    * The current values of the MultiselectInput. The value should can `null`, or an array of `valueField` values, or an array of objects (such as a few items in the `data` array)
    */

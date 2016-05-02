@@ -1,3 +1,4 @@
+import defaultTheme from 'theme/components/Table';
 import cx from 'classnames';
 import {
   any, chain, dec, is, isNil, keys, merge, partial,
@@ -39,7 +40,7 @@ const normalizedColumns = (baseTableProps, columns) => {
 
 const normalizedProps = (helpers, props) => {
   const {
-    className, pagination, pageIndex, pageSize, prevPageIndex, searchable,
+    pagination, pageIndex, pageSize, prevPageIndex, searchable,
     selection, searchValue, sortable, sortAscending, sortField, valueField,
   } = props;
 
@@ -62,7 +63,6 @@ const normalizedProps = (helpers, props) => {
   );
 
   return merge(props, {
-    className: cx('table', className),
     columns,
     data,
     maxPageIndex: helpers.maxPageIndex(sortedData, pageSize),
@@ -82,6 +82,10 @@ const sortedData = (baseTableProps, helpers, data) => {
   return (sortField && sortAscending === false) ? reverse(xs) : xs;
 };
 
+const classes = defaultTheme.classes;
+const options = defaultTheme.options;
+const styles = defaultTheme.styles;
+
 const tableDefaultProps = () => ({
   columns: null,
   data: [],
@@ -93,6 +97,7 @@ const tableDefaultProps = () => ({
   selection: true,
   sortable: true,
   sortAscending: true,
+  theme: { classes, options, styles },
 });
 
 const toggleRow = (selectedRows, rowId) => {

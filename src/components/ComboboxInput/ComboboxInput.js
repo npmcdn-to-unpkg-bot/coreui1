@@ -1,11 +1,30 @@
 import React, { PropTypes } from 'react';
 import Shared from '../../Shared';
 import RWCombobox from 'react-widgets/lib/Combobox';
+import defaultTheme from 'theme/components/ComboboxInput';
+import cx from 'classnames/dedupe';
+import mapProps from 'recompose/mapProps';
+import { merge } from 'ramda';
+
+const systemStyles = { };
+
+const ComboboxInputContainer = mapProps(({ className, sheet, style, theme, ...rest }) => ({
+  className: cx(sheet.classes.comboboxInput, theme.classes.comboboxInput, className),
+  style: merge(theme.styles.comboboxInput, style),
+  ...rest,
+}))(RWCombobox);
+
+const StyledComboboxInput = Shared.useSheet(ComboboxInputContainer, systemStyles);
 
 /**
  * Select an item from the list, or input a custom value. The {widgetName} can also make suggestions as you type.
  */
-const ComboboxInput = (props) => <RWCombobox {...props}>{props.children}</RWCombobox>;
+const ComboboxInput = (props) =>
+  <StyledComboboxInput {...props}>{props.children}</StyledComboboxInput>;
+
+const classes = defaultTheme.classes;
+const options = defaultTheme.options;
+const styles = defaultTheme.styles;
 
 ComboboxInput.defaultProps = {
   busy: false,
@@ -20,6 +39,7 @@ ComboboxInput.defaultProps = {
   },
   minLength: 1,
   suggest: false,
+  theme: { classes, options, styles },
 };
 
 ComboboxInput.displayName = 'ComboboxInput';
@@ -122,6 +142,8 @@ ComboboxInput.propTypes = {
    * Specify which data item field to display in the ${widgetName} and selected item. The textField` prop may also also used as to find an item in the list as you type. Providing an accessor function allows for computed text values
    */
   textField: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+
+  theme: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   /**
    * The current value of the {widgetName}. This can be an object (such as a member of the `data` array) or a primitive value, hinted to by the `valueField`. The widget value does not need to be in the `data`, widgets can have values that are not in their list.
    */

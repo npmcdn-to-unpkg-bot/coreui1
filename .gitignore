@@ -82,3 +82,8 @@ jspm_packages
 *.tgz
 /cards/public/build
 /styleguide/build/bundle.js
+/styleguide/*.eot
+/styleguide/*.gif
+/styleguide/*.svg
+/styleguide/*.ttf
+/styleguide/*.woff

@@ -1,11 +1,30 @@
 import React, { PropTypes } from 'react';
 import Shared from '../../Shared';
 import RWSelectList from 'react-widgets/lib/SelectList';
+import defaultTheme from 'theme/components/SelectListInput';
+import cx from 'classnames/dedupe';
+import mapProps from 'recompose/mapProps';
+import { merge } from 'ramda';
+
+const systemStyles = { };
+
+const SelectListInputContainer = mapProps(({ className, sheet, style, theme, ...rest }) => ({
+  className: cx(sheet.classes.multiselectInput, theme.classes.multiselectInput, className),
+  style: merge(theme.styles.multiselectInput, style),
+  ...rest,
+}))(RWSelectList);
+
+const StyledSelectListInput = Shared.useSheet(SelectListInputContainer, systemStyles);
 
 /**
  * Creates a list of radio buttons or checkboxes bound to a data set.
  */
-const SelectListInput = (props) => <RWSelectList {...props}>{props.children}</RWSelectList>;
+const SelectListInput = (props) =>
+  <StyledSelectListInput {...props}>{props.children}</StyledSelectListInput>;
+
+const classes = defaultTheme.classes;
+const options = defaultTheme.options;
+const styles = defaultTheme.styles;
 
 SelectListInput.defaultProps = {
   busy: false,
@@ -13,6 +32,7 @@ SelectListInput.defaultProps = {
   messages: {
     emptyList: 'There are no items in this list',
   },
+  theme: { classes, options, styles },
 };
 
 SelectListInput.displayName = 'SelectListInput';
@@ -22,11 +42,13 @@ SelectListInput.propTypes = {
    * mark whether the widget is in a busy or loading state. If `true` the widget will display a spinner gif, useful when loading data via an ajax call.
    */
   busy: PropTypes.bool,
+
   children: PropTypes.node,
   /**
    * provide an array of possible values for the SelectListInput. If an array of `objects` is provided you should use the `valueField` and `textField` props, to specify which object properties comprise the value field (such as an id) and the field used to label the item.
    */
   data: PropTypes.array,
+
   delay: PropTypes.number,
   /**
    * Disable the widget, if an `Array` of values is passed in only those values will be disabled.
@@ -48,6 +70,7 @@ SelectListInput.propTypes = {
    * This component is used to render each item in the SelectListInput. The default component renders the text of the selected item (specified by `textfield`)
    */
   itemComponent: PropTypes.element,
+
   listComponent: PropTypes.element,
   /**
    * Object hash containing display text and/or text for screen readers. Use the `messages` object to localize widget text and increase accessibility.
@@ -78,6 +101,8 @@ SelectListInput.propTypes = {
    * Specify which data item field to display in the $SelectListInput and selected item. The `textField` prop may also also used as to find an item in the list as you type. Providing an accessor function allows for computed text values
    */
   textField: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+
+  theme: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   /**
    * The current value or values of the SelectListInput. This can be an object (such as a member of the `data` array) or a primitive value, hinted to by the `valueField`. The widget value does not need to be in the `data` array; widgets can have values that are not in their list.
    */
