@@ -7,7 +7,7 @@ module.exports = {
     const config = Object.assign({}, webpackConfig);
 
     config.entry.push(path.join(__dirname, 'styleguide/css/apollo.css'));
-    config.entry.push(path.join(__dirname, 'styleguide/css/react-widgets.css'));
+    config.entry.push(path.join(__dirname, 'styleguide/css/coreui.css'));
     const dir = path.join(__dirname, 'src');
     const styleguideDir = path.join(__dirname, 'styleguide');
     config.module.loaders.push(
