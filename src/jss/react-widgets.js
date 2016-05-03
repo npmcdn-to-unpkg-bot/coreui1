@@ -59,7 +59,7 @@ export default {
     'background-clip': 'border-box',
     'background-color': '#fff',
     border: '#ccc 1px solid',
-    'border-radius': '4px',
+    'border-radius': 0,
     position: 'relative',
     outline: 0,
   },
