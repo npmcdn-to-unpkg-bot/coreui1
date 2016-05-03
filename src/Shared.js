@@ -5,6 +5,7 @@ import nested from 'jss-nested';
 import camelCase from 'jss-camel-case';
 import defaultUnit from 'jss-default-unit';
 import vendorPrefixer from 'jss-vendor-prefixer';
+import reactWidgetsSheet from './jss/react-widgets';
 
 class Shared {
   constructor() {
@@ -16,6 +17,11 @@ class Shared {
     this.jss.use(camelCase());
     this.jss.use(defaultUnit());
     this.jss.use(vendorPrefixer());
+    this.attachReactWidgetsSheet();
+  }
+
+  attachReactWidgetsSheet = () => {
+    this.jss.createStyleSheet(reactWidgetsSheet, { named: false }).attach();
   }
 
   getRegisteredComponents = () => this.importedComponents;
