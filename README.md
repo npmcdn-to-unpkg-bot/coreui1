@@ -17,7 +17,7 @@ npm i
 ### Devboard
 
 #### Webstorm
-start the `devboard' run configuration
+start the `devboard` run configuration
 
 #### Other 
 `npm start`
@@ -27,7 +27,7 @@ open in browser: [http://localhost:3002](http://localhost:3002)
 ### API docs / Styleguide
 
 #### Webstorm
-start the `styleguide-server' run configuration
+start the `styleguide-server` run configuration
 
 #### Other 
 `npm run styleguide-server`
