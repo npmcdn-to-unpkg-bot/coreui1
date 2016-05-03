@@ -13,5 +13,33 @@ Platform Core UI: Components & Other Reusable Elements
 git clone https://gitlab.imshealth.com/platform/coreui.git
 cd coreui
 npm i
-npm start
 ```
+### Devboard
+
+#### Webstorm
+start the `devboard' run configuration
+
+#### Other 
+`npm start`
+
+open in browser: [http://localhost:3002](http://localhost:3002)
+
+### API docs / Styleguide
+
+#### Webstorm
+start the `styleguide-server' run configuration
+
+#### Other 
+`npm run styleguide-server`
+
+open in browser: [http://localhost:3003](http://localhost:3003)
+
+
+
+
+
+
+
+
+
+
