@@ -33,6 +33,7 @@
     "react-dom": "^15.0.1",
     "react-styleguidist": "^2.2.1",
     "rimraf": "^2.5.2",
+    "shelljs": "^0.7.0",
     "skin-deep": "^0.16.0",
     "unexpected": "^10.13.0",
     "unexpected-react": "^3.0.2",
@@ -43,7 +44,7 @@
     "react-dom": "^15.0.1"
   },
   "kotatsu": {
-    "config": "--public cards/public/ --index cards/public/index.html --devtool \\#cheap-source-map --babel --config cards/webpack.config.js cards/main.js --port 3002"
+    "config": "--public cards/public/ --index cards/public/index.html --devtool \\#cheap-source-map --babel --config cards/webpack.config.js --port 3002 cards/main.js"
   },
   "scripts": {
     "clean": "rimraf ./node_modules/*",
@@ -51,9 +52,9 @@
     "compile:lib": "babel src --out-dir lib",
     "build:lib": "npm run clean:lib && npm run compile:lib",
     "build": "cross-env NODE_PATH=src npm run build:lib",
-    "prestatic": "rm -rf cards/public/build",
-    "start": "kotatsu serve --progress $npm_package_kotatsu_config",
-    "static": "cross-env NODE_ENV=production kotatsu build client -o cards/public/build --minify $npm_package_kotatsu_config",
+    "prestatic": "rimraf cards/public/build",
+    "start": "node scripts/start.js",
+    "static": "cross-env NODE_ENV=production node scripts/static.js",
     "styleguide-build": "styleguidist build",
     "styleguide-server": "styleguidist server",
     "test": "echo \"Error: no test specified\" && exit 1"
