@@ -1,5 +1,6 @@
 import devboard from 'devboard';
 import React from 'react';
+import Button from 'components/Button';
 import Table from 'components/Table';
 
 const definecard = devboard.ns('Table');
@@ -221,6 +222,35 @@ definecard(
             { Name: 'Griffin Smith', Age: 18 },
             { Age: 23, Name: 'Lee Salminen' },
             { Age: 28, Position: 'Developer' },
+          ]}
+          onClick={(v) => console.log(v)}
+        />
+      </div>
+    </div>
+  </div>
+);
+
+const ActionButton = ({ data }) =>
+  <Button onClick={() => console.log(data)} type="primary">Launch</Button>;
+
+definecard(
+  'Table custom components: button example',
+  `
+  `,
+  <div className="container">
+    <div className="row">
+      <div className="col-xs-12 col-xl-8">
+        <Table
+          columns={[
+            { component: ActionButton, displayName: 'Actions', id: 'id' },
+            { displayName: 'Age', id: 'Age' },
+            { displayName: 'Name', id: 'Name' },
+            { displayName: 'Position', id: 'Position' },
+          ]}
+          data={[
+            { Name: 'Griffin Smith', Age: 18, id: 0 },
+            { Age: 23, Name: 'Lee Salminen', id: 1 },
+            { Age: 28, Position: 'Developer', id: 2 },
           ]}
           onClick={(v) => console.log(v)}
         />
