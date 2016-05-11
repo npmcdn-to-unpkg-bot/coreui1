@@ -62,7 +62,6 @@ definecard(
             { Age: 23, Name: 'Lee Salminen' },
             { Age: 28, Position: 'Developer' },
           ]}
-          onClick={(v) => console.log(v)}
         />
       </div>
     </div>
@@ -223,7 +222,6 @@ definecard(
             { Age: 23, Name: 'Lee Salminen' },
             { Age: 28, Position: 'Developer' },
           ]}
-          onClick={(v) => console.log(v)}
         />
       </div>
     </div>
@@ -252,7 +250,6 @@ definecard(
             { Age: 23, Name: 'Lee Salminen', id: 1 },
             { Age: 28, Position: 'Developer', id: 2 },
           ]}
-          onClick={(v) => console.log(v)}
         />
       </div>
     </div>
