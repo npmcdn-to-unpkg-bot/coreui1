@@ -29,7 +29,7 @@ const normalizedColumns = (baseTableProps, columns) => {
 
   return (columns || uniq(chain(keys, data))).map((c) => {
     const component = c.component;
-    const displayName = c.displayName || c;
+    const displayName = isNil(c.displayName) ? c : c.displayName;
     const id = c.id || c;
     const isSearchable = helpers.isColumnSearchable(id, searchable);
     const isSortable = helpers.isColumnSortable(id, sortable);

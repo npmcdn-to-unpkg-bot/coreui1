@@ -240,7 +240,7 @@ definecard(
       <div className="col-xs-12 col-xl-8">
         <Table
           columns={[
-            { component: ActionButton, displayName: 'Actions', id: 'id' },
+            { component: ActionButton, displayName: '', id: 'id' },
             { displayName: 'Age', id: 'Age' },
             { displayName: 'Name', id: 'Name' },
             { displayName: 'Position', id: 'Position' },
@@ -250,6 +250,7 @@ definecard(
             { Age: 23, Name: 'Lee Salminen', id: 1 },
             { Age: 28, Position: 'Developer', id: 2 },
           ]}
+          sortable={['Age', 'Name', 'Position']}
         />
       </div>
     </div>
