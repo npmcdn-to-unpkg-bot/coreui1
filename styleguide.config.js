@@ -3,11 +3,9 @@ module.exports = {
   title: 'Core UI Style Guide',
   components: './src/components/**/*.js',
   serverPort: 3003,
+  template: './styleguide/index.html',
   updateWebpackConfig: function (webpackConfig, env) {
     const config = Object.assign({}, webpackConfig);
-
-    config.entry.push(path.join(__dirname, 'styleguide/css/apollo.css'));
-    config.entry.push(path.join(__dirname, 'styleguide/css/coreui.css'));
     const dir = path.join(__dirname, 'src');
     const styleguideDir = path.join(__dirname, 'styleguide');
     config.module.loaders.push(

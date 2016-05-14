@@ -1,3 +1,5 @@
+const rwDist = 'https://npmcdn.com/react-widgets@3.3.0/dist/';
+
 export default {
   '.rw-btn, .rw-input': { color: 'inherit', font: 'inherit', margin: '0' },
   'button.rw-input': { overflow: 'visible' },
@@ -13,7 +15,7 @@ export default {
   },
   '@font-face': {
     'font-family': "'RwWidgets'",
-    src: "url('../fonts/rw-widgets.eot?#iefix&v=4.1.0') format('embedded-opentype'),url('../fonts/rw-widgets.woff?v=4.1.0') format('woff'),url('../fonts/rw-widgets.ttf?v=4.1.0') format('truetype'),url('../fonts/rw-widgets.svg?v=4.1.0#fontawesomeregular') format('svg')",
+    src: `url('${rwDist}fonts/rw-widgets.eot?#iefix&v=4.1.0') format('embedded-opentype'),url('${rwDist}fonts/rw-widgets.woff?v=4.1.0') format('woff'),url('${rwDist}fonts/rw-widgets.ttf?v=4.1.0') format('truetype'),url('${rwDist}fonts/rw-widgets.svg?v=4.1.0#fontawesomeregular') format('svg')`,
     'font-weight': 'normal',
     'font-style': 'normal',
   },
@@ -104,7 +106,7 @@ export default {
   '.rw-filter-input>.rw-input': { width: '100%', border: 'none', outline: 'none' },
   '.rw-filter-input>span': { 'margin-top': '-2px' },
   '.rw-i.rw-loading': {
-    background: 'url("../img/loading.gif") no-repeat center',
+    background: `url('${rwDist}img/loading.gif') no-repeat center`,
     width: '16px',
     height: '100%',
   },
@@ -112,7 +114,7 @@ export default {
   '.rw-loading-mask': { 'border-radius': '4px', position: 'relative' },
   '.rw-loading-mask:after': {
     content: "''",
-    background: 'url("../img/loader-big.gif") no-repeat center',
+    background: `url('${rwDist}img/loader-big.gif') no-repeat center`,
     position: 'absolute',
     'background-color': '#fff',
     opacity: '.7',
