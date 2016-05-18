@@ -7,13 +7,13 @@ import { merge } from 'ramda';
 
 const systemStyles = {};
 
-const ButtonContainer = mapProps(({ className, sheet, style, theme, type, ...rest }) => ({
+const ButtonContainer = mapProps(({ actionType, className, sheet, style, theme, ...rest }) => ({
   className: cx(
-    sheet.classes.button, sheet.classes[type],
-    theme.classes.button, theme.classes[type],
+    sheet.classes.button, sheet.classes[actionType],
+    theme.classes.button, theme.classes[actionType],
     className
   ),
-  style: merge(theme.styles.button, theme.styles[type], style),
+  style: merge(theme.styles.button, theme.styles[actionType], style),
   ...rest,
 }))('button');
 
@@ -27,18 +27,19 @@ const options = defaultTheme.options;
 const styles = defaultTheme.styles;
 
 Button.defaultProps = {
+  actionType: 'default',
   theme: { classes, options, styles },
-  type: 'default',
 };
 
 Button.displayName = 'Button';
 
 Button.propTypes = {
+  actionType: PropTypes.oneOf(['default', 'link', 'primary', 'secondary']),
   children: PropTypes.node,
   className: PropTypes.string,
   onClick: PropTypes.func,
   theme: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
-  type: PropTypes.string,
+  type: PropTypes.oneOf(['button', 'reset', 'submit']),
 };
 
 Shared.registerComponent('Button', Button);
