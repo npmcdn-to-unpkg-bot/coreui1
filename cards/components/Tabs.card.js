@@ -35,3 +35,24 @@ definecard(
     </div>
   </div>
 );
+
+definecard(
+  'Tabs external content',
+  `
+  `,
+  <div className="container">
+    <div className="row">
+      <div className="col-xs-12 col-xl-8">
+        <Tabs
+          activeTabKey="0"
+          className="tab-bar"
+          externalContent={true}
+          onChange={(activeTabKey) => { console.log({ activeTabKey }); }}
+        >
+          <TabPane tabKey="0" text="Tab 1" />
+          <TabPane tabKey="1" text="Tab 2" />
+        </Tabs>
+      </div>
+    </div>
+  </div>
+);
