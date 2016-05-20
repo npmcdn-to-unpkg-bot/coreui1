@@ -21,8 +21,7 @@ definecard('Button Colors',
 definecard('Button States',
   `
   Disabled styles are available \`button\` and \`input\` tags by applying the disabled attribute.
-  Anchor tags can appear disabled by adding the .disabled class,
-   though this does not actually disable the link.
+  Anchor tags can appear disabled by adding the .disabled class, though this does not actually disable the link.
   `
   ,
   <div>
