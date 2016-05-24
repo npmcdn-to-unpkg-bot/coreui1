@@ -11,13 +11,13 @@ const handleClick = (onClick, onHide, e) => {
 
 const renderButton = ({ onHide }, Form, buttonData, i) => {
   const { displayText, isCancel, isDefault, isFormSubmit, name } = buttonData;
-  const className = isDefault ? 'btn-primary goog-buttonset-default' : 'btn-secondary';
+  const actionType = buttonData.actionType || (isDefault ? 'primary' : 'secondary');
   const onClick = partial(handleClick, [buttonData.onClick, (isCancel && onHide)]);
   const text = displayText || name;
 
   return isFormSubmit ?
-    <Form.Button {...{ className }} key={i} type="submit">{text}</Form.Button> :
-    <Button {...{ className, onClick }} key={i} type="submit">{text}</Button>;
+    <Form.Button {...{ actionType }} key={i} type="submit">{text}</Form.Button> :
+    <Button {...{ actionType, onClick }} key={i} type="submit">{text}</Button>;
 };
 
 const maybeRenderFooter = (props) => {
