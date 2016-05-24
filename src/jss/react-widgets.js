@@ -15,7 +15,7 @@ export default {
   },
   '@font-face': {
     'font-family': "'RwWidgets'",
-    src: `url('${rwDist}fonts/rw-widgets.eot?#iefix&v=4.1.0') format('embedded-opentype'),url('${rwDist}fonts/rw-widgets.woff?v=4.1.0') format('woff'),url('${rwDist}fonts/rw-widgets.ttf?v=4.1.0') format('truetype'),url('${rwDist}fonts/rw-widgets.svg?v=4.1.0#fontawesomeregular') format('svg')`,
+    src: `url('${rwDist}fonts/rw-widgets.eot?#iefix&v=4.1.0') format('embedded-opentype'),url('${rwDist}fonts/rw-widgets.woff') format('woff'),url('${rwDist}fonts/rw-widgets.ttf') format('truetype'),url('${rwDist}fonts/rw-widgets.svg?v=4.1.0#fontawesomeregular') format('svg')`,
     'font-weight': 'normal',
     'font-style': 'normal',
   },
