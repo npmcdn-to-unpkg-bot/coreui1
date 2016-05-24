@@ -229,7 +229,7 @@ definecard(
 );
 
 const ActionButton = ({ data }) =>
-  <Button onClick={() => console.log(data)} type="primary">Launch</Button>;
+  <Button actionType="primary" onClick={() => console.log(data)}>Launch</Button>;
 
 definecard(
   'Table custom components: button example',
