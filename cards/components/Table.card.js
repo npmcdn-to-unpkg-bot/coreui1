@@ -297,3 +297,24 @@ definecard(
     </div>
   </div>
 );
+
+definecard(
+  'Table Case-Insensitive Sort',
+  `
+  `,
+  <div className="container">
+    <div className="row">
+      <div className="col-xs-12 col-xl-8">
+        <Table
+          data={[
+            { Name: 'Griffin Smith', Age: 23 },
+            { Age: 18, Name: 'Lee Salminen', Position: 'Engineer' },
+            { Age: 28, Position: 'developer' },
+          ]}
+          sortAscending={true}
+          sortField="Position"
+        />
+      </div>
+    </div>
+  </div>
+);

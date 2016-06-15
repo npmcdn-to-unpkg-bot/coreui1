@@ -1,8 +1,7 @@
 import defaultTheme from 'theme/components/Table';
-import cx from 'classnames';
 import {
-  any, chain, dec, is, isNil, keys, merge, partial,
-  prop, reverse, splitEvery, sortBy, uniq,
+  any, chain, compose, dec, is, isNil, keys, merge, partial,
+  prop, reverse, splitEvery, sortBy, toLower, uniq,
 } from 'ramda';
 
 const currentPage = (pagination, pageIndex, pageSize, data) =>
@@ -72,12 +71,25 @@ const normalizedProps = (helpers, props) => {
   });
 };
 
+const toString = (strOrNil) => (isNil(strOrNil) ? '' : strOrNil);
+
+const caseInsensitiveSortedData = (filteredData, sortField) => {
+  const firstValue = (filteredData.find((x) => x[sortField]) || {})[sortField];
+  const isCaseInsensitiveSortable = sortField && firstValue &&
+    is(Function, firstValue.toUpperCase);
+  const sortByFn = sortBy(
+    isCaseInsensitiveSortable ? compose(toLower, toString, prop(sortField)) : prop(sortField)
+  );
+
+  return sortByFn(filteredData);
+};
+
 const sortedData = (baseTableProps, helpers, data) => {
   const { columns, searchable, searchValue, sortAscending, sortField } = baseTableProps;
   const filteredData = searchable ?
     data.filter(partial(helpers.isSearchMatchingRow, [columns, searchValue])) :
     data;
-  const xs = !sortField ? filteredData : sortBy(prop(sortField), filteredData);
+  const xs = !sortField ? filteredData : caseInsensitiveSortedData(filteredData, sortField);
 
   return (sortField && sortAscending === false) ? reverse(xs) : xs;
 };
