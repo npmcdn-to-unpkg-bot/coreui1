@@ -1,9 +1,9 @@
 import devboard from 'devboard';
 import React, { Component } from 'react';
 import Button from 'components/Button';
-import DateTimePickerInput from 'components/DateTimePickerInput';
-import DropdownListInput from 'components/DropdownListInput';
-import TextInput from 'components/TextInput';
+import 'components/DateTimePickerInput';
+import 'components/DropdownListInput';
+import 'components/TextInput';
 import Form, { Field, Message } from 'components/Form';
 import Label from 'components/Label';
 import Modal from 'components/Modal';
@@ -142,6 +142,48 @@ definecard(
     <div className="row">
       <div className="col-xs-12 col-xl-8">
         <ModalFormCancelPropagationExample />
+      </div>
+    </div>
+  </div>
+);
+
+const largeButtons = [
+  {
+    className: 'btn-lg',
+    displayText: 'Submit',
+    isDefault: true,
+    isFormSubmit: true,
+    name: 'submit',
+  },
+];
+
+class ModalButtonPropsExample extends Component {
+  state = { showModal: false }
+
+  toggleShowModal = () =>
+    this.setState({ showModal: !this.state.showModal })
+
+  maybeRenderModal = () => this.state.showModal &&
+    <Modal buttons={largeButtons} onHide={this.toggleShowModal}><div>Content</div></Modal>
+
+  render = () => (
+    <div>
+      <Button className="btn-secondary" onClick={this.toggleShowModal}>
+        Show Modal
+      </Button>
+      {this.maybeRenderModal()}
+    </div>
+  )
+}
+
+definecard(
+  'Modal Button Props',
+  `
+  `,
+  <div className="container">
+    <div className="row">
+      <div className="col-xs-12 col-xl-8">
+        <ModalButtonPropsExample />
       </div>
     </div>
   </div>

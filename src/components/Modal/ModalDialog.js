@@ -10,14 +10,16 @@ const handleClick = (onClick, onHide, e) => {
 };
 
 const renderButton = ({ onHide }, Form, buttonData, i) => {
-  const { displayText, isCancel, isDefault, isFormSubmit, name } = buttonData;
+  const { displayText, isCancel, isDefault, isFormSubmit, name, ...rest } = buttonData;
   const actionType = buttonData.actionType || (isDefault ? 'primary' : 'secondary');
   const onClick = partial(handleClick, [buttonData.onClick, (isCancel && onHide)]);
   const text = displayText || name;
 
   return isFormSubmit ?
-    <Form.Button {...{ actionType }} key={i} type="submit">{text}</Form.Button> :
-    <Button {...{ actionType, onClick }} key={i} type="submit">{text}</Button>;
+    <Form.Button {...rest} {...{ actionType }} key={i} type="submit">{text}</Form.Button> :
+    <Button {...rest} {...{ actionType, onClick }} key={i} type={isDefault ? 'submit' : 'button'}>
+      {text}
+    </Button>;
 };
 
 const maybeRenderFooter = (props) => {
@@ -28,10 +30,10 @@ const maybeRenderFooter = (props) => {
   const Form = Shared.getRegisteredComponents().Form;
 
   return buttons && buttons.length && (
-      <div {...{ className }} style={dialogFooterStyle}>
-        {intersperse(' ', buttons.map(partial(renderButton, [props, Form])))}
-      </div>
-    );
+    <div {...{ className }} style={dialogFooterStyle}>
+      {intersperse(' ', buttons.map(partial(renderButton, [props, Form])))}
+    </div>
+  );
 };
 
 const ModalDialog = (props) => {
