@@ -4,15 +4,15 @@ import Shared from '../../Shared';
 import cx from 'classnames';
 import { intersperse, is, partial } from 'ramda';
 
-const handleClick = (onClick, onHide, e) => {
+const handleClick = (onClick, onCancelClick, e) => {
   if (is(Function, onClick)) { onClick(e); }
-  if (is(Function, onHide)) { onHide(e); }
+  if (is(Function, onCancelClick)) { onCancelClick(e); }
 };
 
-const renderButton = ({ onHide }, Form, buttonData, i) => {
+const renderButton = ({ onCancelClick }, Form, buttonData, i) => {
   const { displayText, isCancel, isDefault, isFormSubmit, name, ...rest } = buttonData;
   const actionType = buttonData.actionType || (isDefault ? 'primary' : 'secondary');
-  const onClick = partial(handleClick, [buttonData.onClick, (isCancel && onHide)]);
+  const onClick = partial(handleClick, [buttonData.onClick, (isCancel && onCancelClick)]);
   const text = displayText || name;
 
   return isFormSubmit ?
@@ -78,7 +78,7 @@ const ModalDialog = (props) => {
 ModalDialog.propTypes = {
   children: PropTypes.node,
   headerContent: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-  onHide: PropTypes.func,
+  onCancelClick: PropTypes.func,
   sheet: PropTypes.object,
   theme: PropTypes.object,
 };

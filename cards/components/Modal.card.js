@@ -188,3 +188,35 @@ definecard(
     </div>
   </div>
 );
+
+class ModalNoHideOnBackdropClickExample extends Component {
+  state = { showModal: false }
+
+  toggleShowModal = () =>
+    this.setState({ showModal: !this.state.showModal })
+
+  maybeRenderModal = () => this.state.showModal &&
+  <Modal {...{ buttons }} onEscapeKeyUp={this.toggleShowModal}><div>Content</div></Modal>
+
+  render = () => (
+    <div>
+      <Button className="btn-secondary" onClick={this.toggleShowModal}>
+        Show Modal
+      </Button>
+      {this.maybeRenderModal()}
+    </div>
+  )
+}
+
+definecard(
+  'Modal No Hide on Backdrop Click',
+  `
+  `,
+  <div className="container">
+    <div className="row">
+      <div className="col-xs-12 col-xl-8">
+        <ModalNoHideOnBackdropClickExample />
+      </div>
+    </div>
+  </div>
+);

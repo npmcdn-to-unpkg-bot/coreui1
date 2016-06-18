@@ -7,6 +7,7 @@ import compose from 'recompose/compose';
 import cx from 'classnames/dedupe';
 import mapProps from 'recompose/mapProps';
 import withContext from 'recompose/withContext';
+import withHandlers from 'recompose/withHandlers';
 import { merge } from 'ramda';
 
 const modalStyle = {
@@ -29,14 +30,14 @@ const systemStyles = {
 };
 
 const modalProps = (props) => {
-  const { backdrop, buttons, className, headerContent, onHide, sheet, style, theme } = props;
+  const { backdrop, buttons, className, headerContent, onCancelClick, sheet, style, theme } = props;
 
   return merge(props, {
     backdrop: !!backdrop,
     backdropClassName: cx(sheet.classes.backdrop, theme.classes.backdrop, className),
     backdropStyle: theme.styles.backdrop,
     className: cx(sheet.classes.modal, theme.classes.modal, className),
-    dialogProps: { buttons, headerContent, onHide, sheet, theme },
+    dialogProps: { buttons, headerContent, onCancelClick, sheet, theme },
     show: true,
     style: merge(theme.styles.modal, style),
   });
@@ -51,9 +52,12 @@ const ModalBase = ({ children, dialogProps, ...rest }) => (
 ModalBase.propTypes = { children: PropTypes.node, dialogProps: PropTypes.object };
 
 const ModalContainer = compose(
+  withHandlers({
+    onCancelClick: props => props.onBackdropClick || props.onEscapeKeyUp || props.onHide,
+  }),
   withContext(
     { coreuiModalContext: PropTypes.object },
-    ({ onHide }) => ({ coreuiModalContext: { onHide } })
+    (props) => ({ coreuiModalContext: { onHide: props.onCancelClick } })
   ),
   mapProps(modalProps)
 )(ModalBase);
@@ -190,7 +194,7 @@ Modal.propTypes = {
   /**
    * A `<Transition/>` component to use for the dialog and backdrop components.
    */
-  transition: PropTypes.element, 
+  transition: PropTypes.element,
 };
 
 Shared.registerComponent('Modal', Modal);
