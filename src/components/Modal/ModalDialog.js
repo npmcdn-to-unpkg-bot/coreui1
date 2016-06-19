@@ -9,17 +9,21 @@ const handleClick = (onClick, onCancelClick, e) => {
   if (is(Function, onCancelClick)) { onCancelClick(e); }
 };
 
-const renderButton = ({ onCancelClick }, Form, buttonData, i) => {
+const renderButton = ({ component, onCancelClick }, Form, buttonData, i) => {
   const { displayText, isCancel, isDefault, isFormSubmit, name, ...rest } = buttonData;
   const actionType = buttonData.actionType || (isDefault ? 'primary' : 'secondary');
   const onClick = partial(handleClick, [buttonData.onClick, (isCancel && onCancelClick)]);
   const text = displayText || name;
+  const ModalButton = component || Button;
 
   return isFormSubmit ?
     <Form.Button {...rest} {...{ actionType }} key={i} type="submit">{text}</Form.Button> :
-    <Button {...rest} {...{ actionType, onClick }} key={i} type={isDefault ? 'submit' : 'button'}>
+    <ModalButton
+      {...rest}
+      {...{ actionType, onClick }} key={i} type={isDefault ? 'submit' : 'button'}
+    >
       {text}
-    </Button>;
+    </ModalButton>;
 };
 
 const maybeRenderFooter = (props) => {
