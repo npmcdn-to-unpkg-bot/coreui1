@@ -16,14 +16,23 @@ const renderButton = ({ onCancelClick }, Form, buttonData, i) => {
   const text = displayText || name;
   const ModalButton = component || Button;
 
-  return isFormSubmit ?
-    <Form.Button {...rest} {...{ actionType }} key={i} type="submit">{text}</Form.Button> :
+  return isFormSubmit ? (
+    <Form.Button
+      {...rest}
+      {...{ actionType, component }}
+      key={i}
+      type="submit"
+    >
+      {text}
+    </Form.Button>
+  ) : (
     <ModalButton
       {...rest}
       {...{ actionType, onClick }} key={i} type={isDefault ? 'submit' : 'button'}
     >
       {text}
-    </ModalButton>;
+    </ModalButton>
+  );
 };
 
 const maybeRenderFooter = (props) => {
