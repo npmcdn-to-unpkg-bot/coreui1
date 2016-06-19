@@ -9,8 +9,8 @@ const handleClick = (onClick, onCancelClick, e) => {
   if (is(Function, onCancelClick)) { onCancelClick(e); }
 };
 
-const renderButton = ({ component, onCancelClick }, Form, buttonData, i) => {
-  const { displayText, isCancel, isDefault, isFormSubmit, name, ...rest } = buttonData;
+const renderButton = ({ onCancelClick }, Form, buttonData, i) => {
+  const { component, displayText, isCancel, isDefault, isFormSubmit, name, ...rest } = buttonData;
   const actionType = buttonData.actionType || (isDefault ? 'primary' : 'secondary');
   const onClick = partial(handleClick, [buttonData.onClick, (isCancel && onCancelClick)]);
   const text = displayText || name;
