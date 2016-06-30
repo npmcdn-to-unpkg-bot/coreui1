@@ -49,9 +49,12 @@
   "scripts": {
     "clean": "rimraf ./node_modules/*",
     "clean:lib": "rimraf ./lib/*",
+    "clean:dist": "rimraf ./dist/*",
     "compile:lib": "babel src --out-dir lib",
+    "compile:dist": "webpack --config browser.config.js",
     "build:lib": "npm run clean:lib && npm run compile:lib",
-    "build": "cross-env NODE_PATH=src npm run build:lib",
+    "build:dist": "npm run clean:dist && npm run compile:dist",
+    "build": "cross-env NODE_PATH=src npm run build:lib && npm run build:dist",
     "prestatic": "rimraf cards/public/build",
     "start": "node scripts/start.js",
     "static": "cross-env NODE_ENV=production node scripts/static.js",
