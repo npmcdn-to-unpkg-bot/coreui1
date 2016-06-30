@@ -11,6 +11,10 @@ import NumberPickerInput from './components/NumberPickerInput';
 import SelectListInput from './components/SelectListInput';
 import Tabs from './components/Tabs';
 import TextInput from './components/TextInput';
+import momentLocalizer from 'react-widgets/lib/localizers/moment';
+import numberLocalizer from 'react-widgets/lib/localizers/simple-number';
+
+const localizers = { momentLocalizer, numberLocalizer };
 
 export { Button };
 export { CalendarInput };
@@ -25,9 +29,11 @@ export { NumberPickerInput };
 export { SelectListInput };
 export { Tabs };
 export { TextInput };
+export { localizers };
 
 export default {
   Button, CalendarInput, ComboboxInput, DateTimePickerInput,
   DropdownListInput, Form, Label, Modal, MultiselectInput,
   NumberPickerInput, SelectListInput, Tabs, TextInput,
+  localizers,
 };

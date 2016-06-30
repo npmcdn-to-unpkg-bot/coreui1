@@ -20,15 +20,15 @@ module.exports = {
     ],
   },
   externals: {
-    'react-dom': {
-      root: 'ReactDOM',
-      commonjs: 'react-dom',
-      commonjs2: 'react-dom',
-    },
     react: {
       root: 'React',
       commonjs: 'react',
       commonjs2: 'react',
     },
+    'react-dom': {
+      root: 'ReactDOM',
+      commonjs: 'react-dom',
+      commonjs2: 'react-dom',
+    }
   },
 };
