@@ -9,6 +9,7 @@ import Modal from './components/Modal';
 import MultiselectInput from './components/MultiselectInput';
 import NumberPickerInput from './components/NumberPickerInput';
 import SelectListInput from './components/SelectListInput';
+import Table from './components/Table';
 import Tabs from './components/Tabs';
 import TextInput from './components/TextInput';
 import momentLocalizer from 'react-widgets/lib/localizers/moment';
@@ -27,6 +28,7 @@ export { Modal };
 export { MultiselectInput };
 export { NumberPickerInput };
 export { SelectListInput };
+export { Table };
 export { Tabs };
 export { TextInput };
 export { localizers };
@@ -34,6 +36,6 @@ export { localizers };
 export default {
   Button, CalendarInput, ComboboxInput, DateTimePickerInput,
   DropdownListInput, Form, Label, Modal, MultiselectInput,
-  NumberPickerInput, SelectListInput, Tabs, TextInput,
+  NumberPickerInput, SelectListInput, Table, Tabs, TextInput,
   localizers,
 };
