@@ -17,11 +17,19 @@ class Shared {
     this.jss.use(camelCase());
     this.jss.use(defaultUnit());
     this.jss.use(vendorPrefixer());
+
+    // temporary instance for react-widgets sheet to workaround css-vendor content escaping issues
+    this.rwjss = jss.create();
+    this.rwjss.use(extend());
+    this.rwjss.use(nested());
+    this.rwjss.use(camelCase());
+    this.rwjss.use(defaultUnit());
+
     this.attachReactWidgetsSheet();
   }
 
   attachReactWidgetsSheet = () => {
-    this.jss.createStyleSheet(reactWidgetsSheet, { named: false }).attach();
+    this.rwjss.createStyleSheet(reactWidgetsSheet, { named: false }).attach();
   }
 
   getRegisteredComponents = () => this.importedComponents;
