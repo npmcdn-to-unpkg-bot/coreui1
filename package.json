@@ -3,9 +3,11 @@
   "version": "0.3.2-alpha5",
   "description": "Platform Core UI",
   "main": "lib/index.js",
-  "directories": {
-    "test": "test"
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.imshealth.com/platform/coreui.git"
   },
+  "directories": { "test": "test" },
   "devDependencies": {
     "babel-cli": "^6.7.5",
     "babel-core": "^6.7.6",
