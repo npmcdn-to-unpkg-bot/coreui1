@@ -1,5 +1,5 @@
 import React from 'react';
-import CalendarInput from 'components/CalendarInput';
+import CalendarInput from '../../src/components/CalendarInput';
 import checking from 'checkers/mocha';
 import { expect } from 'chai';
 import sd from 'skin-deep';

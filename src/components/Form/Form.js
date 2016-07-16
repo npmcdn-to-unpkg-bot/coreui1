@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import Button from 'components/Button';
-import TextInput from 'components/TextInput';
+import Button from '../Button';
+import TextInput from '../TextInput';
 import Shared from '../../Shared';
-import defaultTheme from 'theme/components/Form';
+import defaultTheme from '../../theme/components/Form';
 import RFForm, {
   addInputTypes, Button as RFFormButton, Context, Field, Message, Summary, Trigger,
 } from 'react-formal';
@@ -125,7 +125,7 @@ const styles = defaultTheme.styles;
 Form.defaultProps = {
   component: 'form',
   delay: 300,
-  getter: (path, model) => (path ? expr.getter(path, true)(model || {}) : model),
+  getter: (path, model = {}) =>(path ? expr.getter(path, true)(model) : model),
   strict: false,
   theme: { classes, options, styles },
 };

@@ -1,4 +1,4 @@
-import defaultTheme from 'theme/components/Table';
+import defaultTheme from '../../theme/components/Table';
 import {
   any, chain, compose, dec, is, isNil, keys, merge, partial,
   prop, reverse, splitEvery, sortBy, toLower, uniq,

@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import Shared from '../../Shared';
 import RWCombobox from 'react-widgets/lib/Combobox';
-import defaultTheme from 'theme/components/ComboboxInput';
+import defaultTheme from '../../theme/components/ComboboxInput';
 import cx from 'classnames/dedupe';
 import mapProps from 'recompose/mapProps';
 import { merge } from 'ramda';

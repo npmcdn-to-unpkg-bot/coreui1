@@ -1,7 +1,7 @@
 import React, { Children, PropTypes } from 'react';
 import Shared from '../../Shared';
 import AriaTabPanel from 'react-aria-tabpanel';
-import defaultTheme from 'theme/components/Tabs';
+import defaultTheme from '../../theme/components/Tabs';
 import cx from 'classnames/dedupe';
 import mapProps from 'recompose/mapProps';
 import uncontrollable from 'uncontrollable';

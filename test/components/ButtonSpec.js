@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from 'components/Button';
+import Button from '../../src/components/Button';
 import checking from 'checkers/mocha';
 import { expect } from 'chai';
 import sd from 'skin-deep';

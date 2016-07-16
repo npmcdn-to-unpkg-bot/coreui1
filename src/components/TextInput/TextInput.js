@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import Shared from '../../Shared';
-import defaultTheme from 'theme/components/TextInput';
+import defaultTheme from '../../theme/components/TextInput';
 import compose from 'recompose/compose';
 import cx from 'classnames/dedupe';
 import mapProps from 'recompose/mapProps';

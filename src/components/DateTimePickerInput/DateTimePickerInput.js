@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import Shared from '../../Shared';
 import RWDateTimePicker from 'react-widgets/lib/DateTimePicker';
-import defaultTheme from 'theme/components/DateTimePickerInput';
+import defaultTheme from '../../theme/components/DateTimePickerInput';
 import cx from 'classnames/dedupe';
 import mapProps from 'recompose/mapProps';
 import { merge } from 'ramda';

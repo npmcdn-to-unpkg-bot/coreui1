@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import ModalDialog from './ModalDialog';
 import Shared from '../../Shared';
-import defaultTheme from 'theme/components/Modal';
+import defaultTheme from '../../theme/components/Modal';
 import ReactOverlaysModal from 'react-overlays/lib/Modal';
 import compose from 'recompose/compose';
 import cx from 'classnames/dedupe';

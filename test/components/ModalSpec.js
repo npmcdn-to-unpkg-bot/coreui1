@@ -1,5 +1,5 @@
 import React from 'react';
-import Modal from 'components/Modal';
+import Modal from '../../src/components/Modal';
 import checking from 'checkers/mocha';
 import { expect } from 'chai';
 import sd from 'skin-deep';

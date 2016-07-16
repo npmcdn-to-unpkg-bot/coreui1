@@ -1,5 +1,5 @@
 import React from 'react';
-import ComboboxInput from 'components/ComboboxInput';
+import ComboboxInput from '../../src/components/ComboboxInput';
 import checking from 'checkers/mocha';
 import { expect } from 'chai';
 import sd from 'skin-deep';

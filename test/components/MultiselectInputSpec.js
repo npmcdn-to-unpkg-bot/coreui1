@@ -1,5 +1,5 @@
 import React from 'react';
-import MultiselectInput from 'components/MultiselectInput';
+import MultiselectInput from '../../src/components/MultiselectInput';
 import checking from 'checkers/mocha';
 import { expect } from 'chai';
 import sd from 'skin-deep';

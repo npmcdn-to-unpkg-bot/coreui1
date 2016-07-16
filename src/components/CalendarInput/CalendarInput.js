@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import Shared from '../../Shared';
 import RWCalendar from 'react-widgets/lib/Calendar';
-import defaultTheme from 'theme/components/CalendarInput';
+import defaultTheme from '../../theme/components/CalendarInput';
 import cx from 'classnames/dedupe';
 import mapProps from 'recompose/mapProps';
 import { merge } from 'ramda';

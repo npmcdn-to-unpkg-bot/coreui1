@@ -1,5 +1,5 @@
 import React from 'react';
-import SelectListInput from 'components/SelectListInput';
+import SelectListInput from '../../src/components/SelectListInput';
 import checking from 'checkers/mocha';
 import { expect } from 'chai';
 import sd from 'skin-deep';

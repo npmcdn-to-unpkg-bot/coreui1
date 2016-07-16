@@ -1,5 +1,5 @@
 import React from 'react';
-import NumberPickerInput from 'components/NumberPickerInput';
+import NumberPickerInput from '../../src/components/NumberPickerInput';
 import checking from 'checkers/mocha';
 import { expect } from 'chai';
 import sd from 'skin-deep';

@@ -1,5 +1,5 @@
 import React from 'react';
-import Form from 'components/Form';
+import Form from '../../src/components/Form';
 import checking from 'checkers/mocha';
 import { expect } from 'chai';
 import sd from 'skin-deep';

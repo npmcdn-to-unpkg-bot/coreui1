@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import Button from 'components/Button';
+import Button from '../Button';
 import Shared from '../../Shared';
 import cx from 'classnames';
 import { intersperse, is, partial } from 'ramda';

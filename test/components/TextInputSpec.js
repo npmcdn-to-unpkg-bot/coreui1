@@ -1,5 +1,5 @@
 import React from 'react';
-import TextInput from 'components/TextInput';
+import TextInput from '../../src/components/TextInput';
 import checking from 'checkers/mocha';
 import { expect } from 'chai';
 import sd from 'skin-deep';

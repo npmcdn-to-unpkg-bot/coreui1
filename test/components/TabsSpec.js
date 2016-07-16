@@ -1,5 +1,5 @@
 import React from 'react';
-import Tabs, { TabPane } from 'components/Tabs';
+import Tabs, { TabPane } from '../../src/components/Tabs';
 import checking from 'checkers/mocha';
 import { expect } from 'chai';
 import sd from 'skin-deep';

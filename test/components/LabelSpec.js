@@ -1,5 +1,5 @@
 import React from 'react';
-import Label from 'components/Label';
+import Label from '../../src/components/Label';
 import checking from 'checkers/mocha';
 import { expect } from 'chai';
 import sd from 'skin-deep';

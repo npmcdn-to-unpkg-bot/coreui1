@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import Shared from '../../Shared';
 import RWDropdownList from 'react-widgets/lib/DropdownList';
-import defaultTheme from 'theme/components/DropdownListInput';
+import defaultTheme from '../../theme/components/DropdownListInput';
 import cx from 'classnames/dedupe';
 import mapProps from 'recompose/mapProps';
 import { merge } from 'ramda';

@@ -1,5 +1,5 @@
 import React from 'react';
-import DropdownListInput from 'components/DropdownListInput';
+import DropdownListInput from '../../src/components/DropdownListInput';
 import checking from 'checkers/mocha';
 import { expect } from 'chai';
 import sd from 'skin-deep';

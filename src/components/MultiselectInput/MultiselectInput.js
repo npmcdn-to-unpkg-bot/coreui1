@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import Shared from '../../Shared';
 import RWMultiselect from 'react-widgets/lib/Multiselect';
-import defaultTheme from 'theme/components/MultiselectInput';
+import defaultTheme from '../../theme/components/MultiselectInput';
 import cx from 'classnames/dedupe';
 import mapProps from 'recompose/mapProps';
 import { merge } from 'ramda';

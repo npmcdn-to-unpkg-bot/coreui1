@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import Shared from '../../Shared';
 import RWNumberPicker from 'react-widgets/lib/NumberPicker';
-import defaultTheme from 'theme/components/NumberPickerInput';
+import defaultTheme from '../../theme/components/NumberPickerInput';
 import cx from 'classnames/dedupe';
 import mapProps from 'recompose/mapProps';
 import { merge } from 'ramda';

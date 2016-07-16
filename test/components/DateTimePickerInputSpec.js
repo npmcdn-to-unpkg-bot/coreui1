@@ -1,5 +1,5 @@
 import React from 'react';
-import DateTimePickerInput from 'components/DateTimePickerInput';
+import DateTimePickerInput from '../../src/components/DateTimePickerInput';
 import checking from 'checkers/mocha';
 import { expect } from 'chai';
 import sd from 'skin-deep';

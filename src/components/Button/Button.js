@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import Shared from '../../Shared';
-import defaultTheme from 'theme/components/Button';
+import defaultTheme from '../../theme/components/Button';
 import cx from 'classnames/dedupe';
 import mapProps from 'recompose/mapProps';
 import { merge } from 'ramda';

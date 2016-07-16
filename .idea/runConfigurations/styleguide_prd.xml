@@ -1,9 +1,9 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="styleguide-server" type="js.build_tools.npm" factoryName="npm">
-    <package-json value="$PROJECT_DIR$/package.json" />
+  <configuration default="false" name="styleguide-prd" type="js.build_tools.npm" factoryName="npm">
+    <package-json value="$PROJECT_DIR$/styleguide/package.json" />
     <command value="run-script" />
     <scripts>
-      <script value="styleguide-server" />
+      <script value="browser:prd" />
     </scripts>
     <node-interpreter value="project" />
     <envs />

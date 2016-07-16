@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
-import Button from 'components/Button';
-import NumberPickerInput from 'components/NumberPickerInput';
+import Button from '../Button';
+import NumberPickerInput from '../NumberPickerInput';
 import Shared from '../../Shared';
-import TextInput from 'components/TextInput';
+import TextInput from '../TextInput';
 import tableHandlers from './TableHandlers';
 import tableHelpers from './TableHelpers';
 import compose from 'recompose/compose';
