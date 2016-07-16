@@ -1,6 +1,6 @@
 {
   "name": "coreui",
-  "version": "0.3.2-alpha5",
+  "version": "0.3.3-alpha1",
   "description": "Platform Core UI",
   "main": "lib/index.js",
   "repository": {
